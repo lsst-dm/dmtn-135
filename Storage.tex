@@ -1,0 +1,16 @@
+\tiny \begin{longtable} { |p{0.22\textwidth}  |r  |r  |r  |r  |r  |r |} 
+\caption{Storage types and costs used as inputs used for calculations \label{tab:Storage}}\\ 
+\hline 
+{Storage type }&{cost}&{note}&&& \\ \hline
+{fast -- NVME (50GB/ s each) Cost for TB  }&{1000}&{for each TB with file system servers too DDN NVME box with GPFS servers.
+TOP performer with best price also. }&&& \\ \hline
+{normal - SATA GPFS file systems/ TB  }&{135}&{for each TB with file system disks and servers locally attached to production resources.   }&&& \\ \hline
+{latency -- slower but on disk }&{100}&{only at NCSA: for each TB with file systems and all people/ services. 
+The complete service not usually attached.   S3 bucket type.  
+Can be mounted if needed but not for production worthy speeds. }&&& \\ \hline
+{high latency -- very slow -- on tape }&{64}&{only at NCSA: for each TB with file systems and all people/ services. 
+The complete service with data flowing to tape using policies. }&&& \\ \hline
+{FLOPS = sockets * (cores per socket) * (number of clock cycles per second) * (number of floating point operations per cycle).}&&&&& \\ \hline
+{xeon flops real = .18 }&&&&& \\ \hline
+{what is the process needed to do: }&{Qserv, Consolided DB, LSP, DBB (Chile, LDF) }&{}&{DP0,DP1 }&{DR1, Early alerts }& \\ \hline
+\end{longtable} \normalsize
