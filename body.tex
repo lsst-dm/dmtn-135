@@ -1,0 +1,33 @@
+\section{Introduction}
+
+
+
+\section{ Models}\label{sec:model}
+\subsection{Sizing model}\label{sec:sizemodel}
+
+An exhaustive and detailed mode is provided in  \citedsp{LDM-138,LDM-144} - here we concentrate on the needs for the
+final years of construction. We explore the compute and storage needed to get us through commissioning and suggest a 2023 purchase for DR1,2 processing which could be pushed to operations.
+
+\tabref{tab:Inputs} gives the annual requirements for the next few years.
+
+\input{Inputs}
+
+\subsection{Compute and storage }\label{sec:csmodel}
+We which to base our budget on reasonable well know machines for which we have well know prices.
+\tabref{tab:Machines} gives an outline of a few standard machines we use and a price. This table also gives a FLOP estimate
+for those machines.
+\tabref{tab:Storage} gives costs for different types of storage - we will require various latency for different tasks
+and those have varying costs.
+These tables are used as look ups for the cost models in \secref{sec:cost}
+
+\input{Storage}
+\input{Machines}
+
+
+\section{Proposed budget}\label{sec:cost}
+Based on the needs in \tabref{tab:Inputs} and the costs in \tabref{tab:Storage} and \tabref {tab:Machines}
+the following budgets can be considered.
+
+\subsection{Buy Xeon} \label{sec:xeon}
+
+\input{Xeon}
