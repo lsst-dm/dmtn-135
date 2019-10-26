@@ -1,10 +1,138 @@
 \section{Sizing inputs}
 
-The following simplified sizing was derived from \citeds{LDM-144} and was used to give the input sizes
-for the cost model in \secref{sec:cost}.
-The disk sizes are given in \tabref{tab:storageSizing} while the compute is given in \tabref{tab:computeSizing}.
+The following simplified sizing was used to give the input sizes for the cost model in \secref{sec:cost}.
+The storage sizes are given in \tabref{tab:storageSizing} while the compute is given in \tabref{tab:computeSizing}.
+
+\subsection{Storage Model}
 
 \input{storageSizing}
 
+\subsubsection{Overview}
+This simplified storage model eliminates many details in the previous storage model \citedsp{LDM-141} that end up being insignificant.
+There are relatively few data products that require significant amounts of fast SSD or slower disk or tape storage; the others complicate the model without giving much insight.
+In addition, it is assumed that bandwidth is not a significant constraint, other than the distinction between SSD and spinning disk.  With the advent of highly-parallel shared and object storage, having large numbers of spindles solely to achieve high bandwidth for certain operations is not thought to be necessary.
+
+Values are computed for the amount of storage expected to be "on the floor" at the beginning of each fiscal year from FY2020 through FY2023 (which is LSST Operations Year 1).
+Not included is any storage already present at the end of FY2019 holding past data.
+
+This version of the model assumes that all raw science images, all Commissioning processed visit images, and the first year's processed visit images are kept on spinning disk.
+Initially, all raw images and image output data products are placed on "normal" filesystem disk; after 1~year, they are assumed to move to object storage.
+
+All data is backed up to tape permanently, including annual snapshots of filesystems.
+Any incremental backups are assumed to be reusable or otherwise purged and hence not significant.
+
+\subsubsection{Parameters}
+The numbers of Objects, Sources, and ForcedSources are taken from \citeds{LSE-82}, with the FY2022 numbers reduced by a factor of 2/12 to account for the anticipated 2~months of on-sky science validation time for LSSTCam before the survey begins.
+These numbers are ultimately based on models for stars in the galaxy and galaxies in the universe that are dependent on the limiting magnitude achieved in each year.
+
+The numbers of science users are estimates, using "Stack Club" users and Commissioning users for FY2020 and 2021, followed by US science users in FY2022 and FY2023 for Data Preview data.
+The bulk of US science users are not expected to arrive until after Data Release~1 at the beginning of FY2024.
+
+Storage per science user is estimated based on today's usage at NCSA, scaled up as users become more active.
+
+The LSSTCam image size is uncompressed and includes overscan, 4~bytes of raw data per pixel, and both science and corner rafts.
+
+The raw image compression factor was measured on simulated LSST images.
+The lossy image compression factor for processed visit images is the ratio between the lossy-compressed file size (estimated at 1/6 of uncompressed) and the lossless-compressed file size (estimated at 66\% of uncompressed).
+
+The number of observing nights per year and the number of visits per night are maximal estimates.
+2 images per visit is still the baseline and a possibility that must be accounted for.
+The number of calibration images per day was derived from the calibration plan.
+
+As stated above, the number of LSSTCam science images is scaled by 2/12 for FY2022 given the length of science validation time.
+The number of test images is estimated as a ramp up to the full science cadence.
+The numbers of engineering and calibration images are estimated as ramping-down fractions of the number of science and test images, with calibration images ending at the number per day given previously.
+
+Sizes of rows in various data product tables is taken from \citeds{LDM-141}, which was in turn derived from the DPDD.
+
+Qserv replicates its data for fault tolerance; a typical replication factor is selected here.
+
+\subsubsection{Data Product Sizing}
+Images and the results of processing them are the dominant factor controlling storage sizing.
+Precursor survey and LSSTCam images are the largest; ComCam, at less than 5\% of the size of LSSTCam and with little on-sky science time is negligible, as is LATISS, which is less than 1\% of the size of LSSTCam, though it has considerable on-sky time.
+
+The sizing of the Alert Production Database (APDB) is based on experiments in \cite{DMTN-113} which found that 57,000 visits took 4.5~TB including indexes.
+A simple linear scaling to a full year's visits was performed, with half that purchased in 2020 for large (but not full) scale testing.
+
+HyperSuprime-Cam (HSC) RC2 is a relatively small dataset used for monthly processing tests.
+The size of the input images was taken from \cite{DMTN-091}; the size of the outputs (image and Parquet/other non-image files) was measured from the latest execution.
+A similar size dataset based on DESC DC2 is assumed to be being used for an additional monthly processing test.
+Note that this is a very small subset of the full DESC DC2, which is expected to cover 300~square degrees to 10-year LSST depth (approximately 1000 epochs per point on the sky).
+The full DESC DC2 is not currently scheduled to be reprocessed by the construction team.
+Instead, twice-a-year processings of the full HSC SSP PDR2 dataset are assumed to occur.
+The size of this dataset was also taken from \cite{DMTN-091}; it is 5654~visits of 104~CCDs, each of which occupies 18.2~MB.
+
+Output sizes are assumed to scale linearly with input size, and by the same factor for each instrument.
+
+Scratch space is set at 10\% of the output image storage for LSSTCam processing; it is assumed to be already present for precursor processing.
+
+Qserv Czar fast (SSD) storage is assumed to be used for the primary Object table; additional space for the so-called "secondary index" mapping object identifiers to spatial chunks is negligible in comparison.
+
+The main Qserv database storage is based on the Parquet file sizing for precursor data and on the estimated numbers of Objects, Sources, and ForcedSources for LSSTCam data.
+
+Note that no space is explicitly reserved for Qserv query result storage.
+
+An additional 20\% disk and tape storage is added to account for all other needs.
+
+\subsubsection{Storage Sizing}
+Finally, storage is allocated to specific types.
+Fast storage (SSD) is used for the APDB and Qserv Czar, which accumulates data from year to year until Data Releases are retired.
+Normal storage is used for inputs, scratch, and output images (initially).
+It is also used for Qserv database storage, which accumulates from year to year.
+Object storage is used for output tables each year and output images after one year.
+Lossy compression is applied at this time.
+Since only one year of operational processing is in the model, nothing is removed from the object store; it accumulates from year to year.
+Tape is used for long-term archiving and filesystem backup.
+Again, this accumulates from year to year.
+
+Note that no replication is assumed in the object store.
+
+
+\subsection{Compute Model}
+
 \input{computeSizing}
 
+\subsubsection{Overview}
+This simplified computing model divides computation into three classes: Data Release Production (DRP), Alert Production, and LSST Science Platform.
+Calibration Products Production is assumed to be negligible.
+
+The pipelines have advanced considerably in terms of fidelity and science performance since the previous computing model \citedsp{LDM-138} was developed.
+Scaling compute needs based on an execution of the nascent DRP pipeline on HSC PDR1 data and nightly executions of the nascent ap_pipe pipeline on HiTS2015 data is thus appropriate, but the fact that several steps are still missing from these pipelines must be taken into account.
+
+Times are measured on existing hardware.
+Given an assumed efficiency ratio specifying the number of floating point operations (FLOPs with lowercase "s") per clock cycle, the number of sustained FLOPs/sec (also written FLOPS with uppercase "s") can be computed.
+This number is then multiplied by the wall-clock time and number of cores to determine the total FLOPs for a pipeline executing on a dataset.
+This estimation methodology incorporates all I/O, memory bandwidth, cache miss, and other overheads into the single efficiency ratio, simplifying calculations.
+
+\subsubsection{Parameters}
+
+DRP executes on the verification cluster, which uses Intel Xeon E5-2690v3 CPUs at 2.6~GHz.
+The Alert Production executes on Kubernetes nodes, which are a bit slower; to be conservative, this is neglected.
+
+The most recent run of DRP on HSC PDR1 data is described at \url{https://confluence.lsstcorp.org/x/WpBiB}.
+The input data is the same size as PDR2 from the storage sheet.
+Most jobs (but not most of the time) could run on relatively small-memory machines with 24~cores and 5~GB RAM per core.
+The largest and longest-running jobs, however, required up to 4~times as much memory, using half or a quarter of the cores.
+To be conservative, we assume that half the cores were used for the large-memory jobs.
+Since the HSC PDR1 processing did not include several steps from the Science Pipelines Design document \citedsp{LDM-151} such as image differencing and full multi-epoch characterization, the time and FLOPs used are scaled up to the expected pipeline consumption.
+
+The SQuaSH system reports the execution time of \texttt{ap\_pipe} in seconds per CCD.
+A mean was taken over all processed CCDs, and it was assumed that each CCD is processed on a single core.
+A factor is added to account for additional steps like differential chromatic refraction compensation and false positive detection that are not well-represented in the current pipeline.
+Multiplying by the number of LSSTCam science CCDs and the sustained FLOPS per core gives the total number of floating point operations used per LSSTCam visit.
+
+\subsubsection{Data Release Production}
+
+The number of floating point operations per TB of input data is multiplied by the precursor (HSC RC2 and DESC DC2 subset for 12~months and HSC PDR2 twice a year) and LSSTCam input data sizes to determine the total number of FLOPs needed in each year.
+Approximately half of these FLOPs need to be provided by small-memory (4-5~GB/core) machines; the other half needs to come from large-memory (20~GB/core) machines.
+
+\subsubsection{Alert Production}
+
+The floating point operations per visit are divided by the minimum visit length (30~sec plus 1~sec shutter motion plus 2~sec readout) to give the minimum FLOP/sec rate needed to keep up with image taking.
+This could be provided over multiple "strings" of nodes, at increased latency to delivery of alerts, if single cores are not fast enough.
+
+\subsubsection{LSST Science Platform}
+
+LSST Science Platform needs for external science users are derived as 10\% of the DRP FLOP requirement.
+The LSP floating point operations are assumed to be spread over a year, giving a mean FLOP/sec rate.
+As a reasonableness check, the number of FLOP/sec per science user is computed, but it must be noted that an oversubscription factor needs to be taken into account, since not all users are expected to be simultaneously active.
