@@ -1,15 +1,15 @@
 \tiny \begin{longtable} { |p{0.22\textwidth}  |r  |r  |r  |r  |r  |r  |r |} 
-\caption{Inputs used to calculate sotrage needs \label{tab:storageSizing}}\\ 
+\caption{Inputs used to calculate storage needs \label{tab:storageSizing}}\\ 
 \hline 
 {Parameters}&{unit}&{FY2020}&{FY2021}&{FY2022}&{FY2023/ LOY1}&{Notes} \\ \hline
 {Objects}&{number}&{}&{}&{4.58E+09}&{2.75E+10}&{from LSE-81, scaled to 2 months for 2022, ComCam ignored} \\ \hline
 {Sources}&{number}&{}&{}&{1.50E+11}&{9.01E+11}&{from LSE-81, scaled to 2 months for 2022, ComCam ignored} \\ \hline
 {ForcedSources}&{number}&{}&{}&{4.85E+11}&{2.91E+12}&{from LSE-81, scaled to 2 months for 2022, ComCam ignored} \\ \hline
 {Science users}&{users}&{50}&{100}&{5000}&{5000}&{"Stack Club" to 2021, DP users thereafter} \\ \hline
-{TB per science user}&{TB}&{0.005}&{0.01}&{0.05}&{0.1}&{ramp; includes oversubscription} \\ \hline
-{LSSTCam image size}&{TB}&{0.0138}&{}&{}&{}&{uncompressed, 32 bit, with overscan and corner rafts} \\ \hline
-{Raw image compression}&{factor}&{0.42}&{}&{}&{}&{lossless-compressed divided by uncompressed} \\ \hline
-{Lossy image compression}&{factor}&{0.250}&{}&{}&{}&{lossy-compressed divided by lossless-compressed} \\ \hline
+{Storage per science user}&{TB}&{0.005}&{0.01}&{0.05}&{0.1}&{ramp; includes oversubscription} \\ \hline
+{LSSTCam image size}&{TB}&{0.0152}&{}&{}&{}&{uncompressed, 32 bit, with overscan and corner rafts} \\ \hline
+{Raw image compression}&{factor}&{0.42}&{}&{}&{}&{lossless-compressed divided by uncompressed for raws} \\ \hline
+{Lossy image compression}&{factor}&{0.250}&{}&{}&{}&{lossy-compressed divided by lossless-compressed for PVIs} \\ \hline
 {Observing nights per year}&{nights}&{300}&{}&{}&{}&{maximum} \\ \hline
 {Visits per night}&{visits}&{1000}&{}&{}&{}&{maximum} \\ \hline
 {Images per visit}&{images}&{2}&&&& \\ \hline
@@ -25,24 +25,24 @@
 {Qserv replication factor}&{factor}&{3.0}&&&& \\ \hline
 {Dataset Sizing}&{unit}&{FY2020}&{FY2021}&{FY2022}&{FY2023/ LOY1}&{Notes} \\ \hline
 {APDB}&{TB}&{12}&{24}&{24}&{24}&{4.5/ 57K TB per visit; 1 year retention; 6 months in 2020} \\ \hline
-{HSC RC2 Input Images}&{TB}&{6.3}&{6.3}&{6.3}&{6.3}&{uncompressed} \\ \hline
+{HSC RC2 Input Images}&{TB}&{6.3}&{6.3}&{6.3}&{6.3}&{uncompressed, from DMTN-091} \\ \hline
 {HSC RC2 Output Images}&{TB}&{5.4}&{5.4}&{5.4}&{5.4}&{lossless-compressed} \\ \hline
 {HSC RC2 Output Parquet}&{TB}&{1.9}&{1.9}&{1.9}&{1.9}& \\ \hline
-{HSC SSP PDR Input Images}&{TB}&{15.0}&{15.0}&{15.0}&{15.0}& \\ \hline
-{DESC DC2 Input Images}&{TB}&{414}&{414}&{414}&{414}&{300 sq deg, 10 year depth} \\ \hline
-{LSSTCam Raw Images}&{TB}&{290}&{507}&{1173}&{4380}&{compressed, moves to object store} \\ \hline
-{Precursor Output Images}&{TB}&{157}&{157}&{157}&{157}&{monthly RC2 and DC2 subset plus biannual PDR} \\ \hline
-{Precursor Output Parquet}&{TB}&{53}&{53}&{53}&{53}& \\ \hline
-{LSSTCam Output Images}&{TB}&{}&{}&{1192}&{7151}&{lossless-compressed, moves to object store} \\ \hline
-{LSSTCam Output Parquet}&{TB}&{}&{}&{407}&{2440}& \\ \hline
-{Scratch}&{TB}&{}&{}&{119}&{715}&{10\% of output images} \\ \hline
-{Qserv Czar/ Object}&{TB}&{}&{}&{8}&{54}&{based on row sizes and counts} \\ \hline
-{Qserv Database}&{TB}&{166}&{166}&{684}&{3791}&{based on Parquet for preliminary; based on row sizes and counts} \\ \hline
+{HSC SSP PDR Input Images}&{TB}&{10.7}&{10.7}&{10.7}&{10.7}& \\ \hline
+{DESC DC2 Input Images}&{TB}&{455}&{455}&{455}&{455}&{300 sq deg, 10 year depth} \\ \hline
+{LSSTCam Raw Images}&{TB}&{319}&{557}&{1290}&{4816}&{compressed, moves to object store} \\ \hline
+{Precursor Output Images}&{TB}&{149}&{149}&{149}&{149}&{monthly RC2 and DC2 subset plus biannual PDR} \\ \hline
+{Precursor Output Parquet}&{TB}&{51}&{51}&{51}&{51}& \\ \hline
+{LSSTCam Output Images}&{TB}&{}&{}&{1310}&{7863}&{lossless-compressed, moves to object store} \\ \hline
+{LSSTCam Output Parquet}&{TB}&{}&{}&{447}&{2683}& \\ \hline
+{Scratch}&{TB}&{}&{}&{131}&{786}&{10\% of output images} \\ \hline
+{Qserv Czar/ Object}&{TB}&{}&{}&{8}&{51}&{based on row sizes and counts} \\ \hline
+{Qserv Database}&{TB}&{158}&{158}&{569}&{3417}&{based on Parquet for preliminary; based on row sizes and counts} \\ \hline
 {Science User Home}&{TB}&{0}&{1}&{250}&{500}& \\ \hline
-{Other/ Misc}&{TB}&{224}&{270}&{902}&{3941}&{20\% of total} \\ \hline
+{Other/ Misc}&{TB}&{234}&{284}&{942}&{4164}&{20\% of total} \\ \hline
 {Storage Sizing (on the floor)}&{unit}&{FY2020}&{FY2021}&{FY2022}&{FY2023/ LOY1}&{Notes} \\ \hline
-{Fast}&{TB}&{12}&{24}&{31}&{77}&{SSD} \\ \hline
-{Normal}&{TB}&{1332}&{1596}&{5386}&{23625}&{Enterprise SATA} \\ \hline
-{Object Store}&{TB}&{290}&{797}&{2674}&{11282}& \\ \hline
-{Tape}&{TB}&{1332}&{2928}&{9647}&{37532}& \\ \hline
+{Fast}&{TB}&{12}&{24}&{32}&{83}&{SSD} \\ \hline
+{Normal}&{TB}&{1390}&{1680}&{5628}&{25535}&{Enterprise SATA} \\ \hline
+{Object Store}&{TB}&{319}&{876}&{2941}&{12405}& \\ \hline
+{Tape}&{TB}&{1390}&{3070}&{8697}&{34233}& \\ \hline
 \end{longtable} \normalsize

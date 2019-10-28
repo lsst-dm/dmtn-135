@@ -2,27 +2,28 @@
 \caption{Inputs used to calculate compute needs \label{tab:computeSizing}}\\ 
 \hline 
 {Parameters}&{units}&{}&{}&{}&{}&{Notes} \\ \hline
-{Max FLOPS per core}&{FLOP/ core/ sec}&{2.1E+10}&{}&{}&{}&{2.6 GHz, 8 FLOPs/ cycle} \\ \hline
-{Sustained FLOPS per core}&{FLOP/ core/ sec}&{4.7E+08}&{}&{}&{}&{25\% of max} \\ \hline
-{HSC RC2 Input Images}&{TB}&{6.3}&&&& \\ \hline
-{HSC RC2 compute}&{core-hours}&{9227}&{}&{}&{}&{measured} \\ \hline
-{HSC RC2 high-memory compute}&{core-hours}&&&&& \\ \hline
-{Additional DRP steps}&{factor}&{1}&{}&{}&{}&{additional deblending, stackfit, etc.} \\ \hline
-{DRP FLOPs per TB of input}&{FLOP/ TB}&{4.9E+15}&{}&{}&{}&{based on sustained FLOPS} \\ \hline
+{Max FLOP/ sec per core}&{FLOP/ core/ sec}&{2.1E+10}&{}&{}&{}&{E5-2690 v3 @ 2.60GHz, 8 FLOPs/ cycle} \\ \hline
+{Sustained efficiency}&{FLOP/ cycle}&{0.18}&&&& \\ \hline
+{Sustained FLOP/ sec per core}&{FLOP/ core/ sec}&{4.7E+08}&&&& \\ \hline
+{HSC PDR1 Input Images}&{TB}&{10.7}&{}&{}&{}&{5654 visits of 104 CCDs} \\ \hline
+{HSC PDR1 small-memory compute}&{core-hours}&{64392}&{}&{}&{}&{measured} \\ \hline
+{HSC PDR1 high-memory compute}&{core-hours}&{78523}&{}&{}&{}&{measured} \\ \hline
+{Additional DRP steps}&{factor}&{1.5}&{}&{}&{}&{image differencing, stackfit, etc.} \\ \hline
+{DRP FLOPs per TB of input}&{FLOP/ TB}&{5.6E+16}&{}&{}&{}&{based on sustained FLOPS} \\ \hline
 {ap\_pipe sec/ CCD}&{core-sec/ CCD}&{83}&{}&{}&{}&{measured} \\ \hline
 {Additional AP steps}&{factor}&{0.25}&{}&{}&{}&{DCR, real\_bogus, etc.} \\ \hline
 {AP FLOPs per visit}&{FLOP}&{9.2E+12}&{}&{}&{}&{based on sustained FLOPS} \\ \hline
 {Data Release Production}&{units}&{FY2020}&{FY2021}&{FY2022}&{FY2023/ LOY1}&{Notes} \\ \hline
-{Precursor Input Size}&{TB}&{181.2}&{181.2}&{181.2}&{181.2}& \\ \hline
-{LSSTCam Input Size}&{TB}&{}&{}&{1379}&{8277}& \\ \hline
-{Precursor FLOPs}&{FLOP}&{9E+17}&{9E+17}&{9E+17}&{9E+17}& \\ \hline
-{LSSTCam FLOPs}&{FLOP}&{}&{}&{7E+18}&{4E+19}& \\ \hline
-\textbf{Total FLOPs}&\textbf{FLOP}&\textbf{9E+17}&\textbf{9E+17}&\textbf{8E+18}&\textbf{4E+19}& \\ \hline
+{Precursor Input Size}&{TB}&{173}&{173}&{173}&{173}& \\ \hline
+{LSSTCam Input Size}&{TB}&{}&{}&{1517}&{9101}& \\ \hline
+{Precursor FLOPs}&{FLOP}&{1E+19}&{1E+19}&{1E+19}&{1E+19}& \\ \hline
+{LSSTCam FLOPs}&{FLOP}&{}&{}&{9E+19}&{5E+20}& \\ \hline
+\textbf{Total FLOPs}&\textbf{FLOP}&\textbf{1E+19}&\textbf{1E+19}&\textbf{1E+20}&\textbf{5E+20}& \\ \hline
 {Alert Production}&{units}&{FY2020}&{FY2021}&{FY2022}&{FY2023/ LOY1}&{Notes} \\ \hline
 {AP FLOPs}&{FLOP}&{}&{}&{9.2E+12}&{9.2E+12}& \\ \hline
-{AP FLOP/ sec}&{FLOP/ sec}&{}&{}&{2.5E+11}&{2.5E+11}&{minimum necessary to keep up} \\ \hline
-{AP FLOP/ core/ sec}&{FLOP/ core/ sec}&{}&{}&{1.3E+09}&{1.3E+09}&{assuming 1 core/ CCD} \\ \hline
+{AP FLOP/ sec}&{FLOP/ sec}&{}&{}&{2.8E+11}&{2.8E+11}&{minimum necessary to keep up} \\ \hline
+{AP FLOP/ core/ sec}&{FLOP/ core/ sec}&{}&{}&{1.5E+09}&{1.5E+09}&{assuming 1 core/ CCD} \\ \hline
 {LSST Science Platform}&{units}&{FY2020}&{FY2021}&{FY2022}&{FY2023/ LOY1}&{Notes} \\ \hline
-{LSP FLOPS}&{FLOP/ sec}&{}&{}&{2.4E+10}&{1.3E+11}&{10\% of DRP, over a year} \\ \hline
-{LSP FLOPS/ science user}&{FLOP/ sec/ user}&{}&{}&{4.9E+06}&{2.6E+07}&{includes oversubscription} \\ \hline
+{LSP FLOP/ sec}&{FLOP/ sec}&{}&{}&{3.0E+11}&{1.7E+12}&{10\% of DRP, over a year} \\ \hline
+{LSP FLOP/ sec/ science user}&{FLOP/ sec/ user}&{}&{}&{6.0E+07}&{3.3E+08}&{includes oversubscription} \\ \hline
 \end{longtable} \normalsize
