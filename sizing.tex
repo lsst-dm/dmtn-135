@@ -1,12 +1,10 @@
 \section{Sizing inputs}
 
 The following simplified sizing was used to give the input sizes for the cost model in \secref{sec:cost}.
-The storage sizes are given in \tabref{tab:storageSizing} while the compute is given in \tabref{tab:computeSizing}.
+The storage sizes are given in \tabref{tab:storageFloor} while the compute is given in \tabref{tab:computeSizing}.
 
 \subsection{Storage Model}
 
-\input{storageFloor}
-\input{datasetSizing}
 \input{storageSizing}
 
 
@@ -26,7 +24,7 @@ Any incremental backups are assumed to be reusable or otherwise purged and hence
 
 \subsubsection{Parameters}
 The numbers of Objects, Sources, and ForcedSources are taken from \citeds{LSE-82}, with the FY2022 numbers reduced by a factor of 2/12 to account for the anticipated 2~months of on-sky science validation time for LSSTCam before the survey begins.
-These numbers are ultimately based on models for stars in the galaxy and galaxies in the universe that are dependent on the limiting magnitude achieved in each year.
+These numbers are ultimately based on models for stars in the galaxy and galaxies in the universe that are dependent on the limiting magnitude achieved in each year and are listed in \tabref{tab:storageSizing}
 
 The numbers of science users are estimates, using "Stack Club" users and Commissioning users for FY2020 and 2021, followed by US science users in FY2022 and FY2023 for Data Preview data.
 The bulk of US science users are not expected to arrive until after Data Release~1 at the beginning of FY2024.
@@ -51,7 +49,7 @@ Sizes of rows in various data product tables is taken from \citeds{LDM-141}, whi
 Qserv replicates its data for fault tolerance; a typical replication factor is selected here.
 
 \subsubsection{Data Product Sizing}
-Images and the results of processing them are the dominant factor controlling storage sizing.
+Images and the results of processing them are the dominant factor controlling storage sizing which is outlined in \tabref{tab:datasetSizing}.
 Precursor survey and LSSTCam images are the largest; ComCam, at less than 5\% of the size of LSSTCam and with little on-sky science time is negligible, as is LATISS, which is less than 1\% of the size of LSSTCam, though it has considerable on-sky time.
 
 The sizing of the Alert Production Database (APDB) is based on experiments in \cite{DMTN-113} which found that 57,000 visits took 4.5~TB including indexes.
@@ -77,8 +75,10 @@ Note that no space is explicitly reserved for Qserv query result storage.
 
 An additional 20\% disk and tape storage is added to account for all other needs.
 
+\input{datasetSizing}
+
 \subsubsection{Storage Sizing}
-Finally, storage is allocated to specific types.
+Finally, storage is allocated to specific types as shown in \tabref{tab:storageFloor}.
 Fast storage (SSD) is used for the APDB and Qserv Czar, which accumulates data from year to year until Data Releases are retired.
 Normal storage is used for inputs, scratch, and output images (initially).
 It is also used for Qserv database storage, which accumulates from year to year.
@@ -90,6 +90,7 @@ Again, this accumulates from year to year.
 
 Note that no replication is assumed in the object store.
 
+\input{storageFloor}
 
 \subsection{Compute Model}
 
@@ -126,16 +127,20 @@ Multiplying by the number of LSSTCam science CCDs and the sustained FLOPS per co
 
 \subsubsection{Data Release Production}
 
-The number of floating point operations per TB of input data is multiplied by the precursor (HSC RC2 and DESC DC2 subset for 12~months and HSC PDR2 twice a year) and LSSTCam input data sizes to determine the total number of FLOPs needed in each year.
+The number of floating point operations per TB of input data is multiplied by the precursor (HSC RC2 and DESC DC2 subset for 12~months and HSC PDR2 twice a year) and LSSTCam input data sizes to determine the total number of FLOPs needed in each year, this is shown in \tabref{tab:drpSizing}.
 Approximately half of these FLOPs need to be provided by small-memory (4-5~GB/core) machines; the other half needs to come from large-memory (20~GB/core) machines.
 
+\input {drpSizing}
 \subsubsection{Alert Production}
 
-The floating point operations per visit are divided by the minimum visit length (30~sec plus 1~sec shutter motion plus 2~sec readout) to give the minimum FLOP/sec rate needed to keep up with image taking.
+The floating point operations per visit are divided by the minimum visit length (30~sec plus 1~sec shutter motion plus 2~sec readout) to give the minimum FLOP/sec rate needed to keep up with image taking this is shown in \tabref{tab:alertSizing}.
 This could be provided over multiple "strings" of nodes, at increased latency to delivery of alerts, if single cores are not fast enough.
 
+\input {alertSizing}
 \subsubsection{LSST Science Platform}
 
-LSST Science Platform needs for external science users are derived as 10\% of the DRP FLOP requirement.
+LSST Science Platform needs for external science users are derived as 10\% of the DRP FLOP requirement and is shown in \tabref{tab:lspSizing}.
 The LSP floating point operations are assumed to be spread over a year, giving a mean FLOP/sec rate.
 As a reasonableness check, the number of FLOP/sec per science user is computed, but it must be noted that an oversubscription factor needs to be taken into account, since not all users are expected to be simultaneously active.
+
+\input {lspSizing}
