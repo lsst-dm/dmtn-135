@@ -1,4 +1,4 @@
-\documentclass[DM,authoryear,toc]{lsstdoc}
+\documentclass[DM,lsstdraft,authoryear,toc]{lsstdoc}
 % lsstdoc documentation: https://lsst-texmf.lsst.io/lsstdoc.html
 \input{meta}
 
@@ -10,13 +10,14 @@
 %\input{aglossary.tex}
 %\makeglossaries
 
-\title{DM sizing model and purchase plan for the remainder of construction.}
+\title{
+DM sizing model and purchase plan for the remainder of construction.}
 
 % Optional subtitle
 % \setDocSubtitle{A subtitle}
 
 \author{%
-William O'Mullane
+Michelle Butler, Kian Tat Lim, William O'Mullane
 }
 
 \setDocRef{DMTN-135}
@@ -43,13 +44,11 @@ This simplified model is based on real machine architectures we have today. We d
 \begin{document}
 
 % Create the title page.
-\maketitle
-% Frequently for a technote we do not want a title page  uncomment this to remove the title page and changelog.
-% use \mkshorttitle to remove the extra pages
+\mkshorttitle
 
-% ADD CONTENT HERE
-% You can also use the \input command to include several content files.
+\input{body}
 
+\input {sizing}
 \appendix
 % Include all the relevant bib files.
 % https://lsst-texmf.lsst.io/lsstdoc.html#bibliographies

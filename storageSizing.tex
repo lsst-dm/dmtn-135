@@ -1,0 +1,26 @@
+\tiny \begin{longtable} { |p{0.22\textwidth}  |r  |r  |r  |r  |r  |r  |r |} 
+\caption{Inputs used to calculate storage needs \label{tab:storageSizing}}\\ 
+\hline 
+{Parameters}&{unit}&{FY2020}&{FY2021}&{FY2022}&{FY2023/ LOY1}&{Notes} \\ \hline
+{Objects}&{number}&{}&{}&{4.58E+09}&{2.75E+10}&{from LSE-81, scaled to 2 months for 2022, ComCam ignored} \\ \hline
+{Sources}&{number}&{}&{}&{1.50E+11}&{9.01E+11}&{from LSE-81, scaled to 2 months for 2022, ComCam ignored} \\ \hline
+{ForcedSources}&{number}&{}&{}&{4.85E+11}&{2.91E+12}&{from LSE-81, scaled to 2 months for 2022, ComCam ignored} \\ \hline
+{Science users}&{users}&{50}&{100}&{5000}&{5000}&{"Stack Club" to 2021, DP users thereafter} \\ \hline
+{Storage per science user}&{TB}&{0.005}&{0.01}&{0.05}&{0.1}&{ramp; includes oversubscription} \\ \hline
+{LSSTCam image size}&{TB}&{0.0152}&{}&{}&{}&{uncompressed, 32 bit, with overscan and corner rafts} \\ \hline
+{Raw image compression}&{factor}&{0.42}&{}&{}&{}&{lossless-compressed divided by uncompressed for raws} \\ \hline
+{Lossy image compression}&{factor}&{0.250}&{}&{}&{}&{lossy-compressed divided by lossless-compressed for PVIs} \\ \hline
+{Observing nights per year}&{nights}&{300}&{}&{}&{}&{maximum} \\ \hline
+{Visits per night}&{visits}&{1000}&{}&{}&{}&{maximum} \\ \hline
+{Images per visit}&{images}&{2}&&&& \\ \hline
+{Calibration images per day}&{images}&{500}&&&& \\ \hline
+{LSSTCam Science images}&{images}&{}&{}&{100000}&{600000}&{test images until 2 months of science in 2022} \\ \hline
+{LSSTCam Test images}&{images}&{25000}&{50000}&{50000}&{}&{ramp to science images} \\ \hline
+{LSSTCam Engineering images}&{images}&{12500}&{12500}&{15000}&{6000}&{decreasing ramp} \\ \hline
+{LSSTCam Calibration images}&{images}&{12500}&{25000}&{37500}&{150000}&{estimates based on science and test images; actual for 2023} \\ \hline
+{Object table row size}&{bytes}&{1840}&{}&{}&{}&{from LDM-141} \\ \hline
+{Object\_Extra tables row size}&{bytes}&{20393}&{}&{}&{}&{from LDM-141} \\ \hline
+{Source table row size}&{bytes}&{453}&{}&{}&{}&{from LDM-141} \\ \hline
+{ForcedSource table row size}&{bytes}&{41}&{}&{}&{}&{from LDM-141} \\ \hline
+{Qserv replication factor}&{factor}&{3.0}&&&& \\ \hline
+\end{longtable} \normalsize
