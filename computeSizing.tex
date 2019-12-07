@@ -1,16 +1,17 @@
 \tiny \begin{longtable} { |p{0.22\textwidth}  |r  |r  |r  |r  |r  |r  |r |} 
 \caption{Inputs used to calculate compute needs \label{tab:computeSizing}}\\ 
 \hline 
-{Parameters}&{units}&{}&{}&{}&{}&{Notes} \\ \hline
-{Max FLOP/ sec per core}&{FLOP/ core/ sec}&{4.0E+10}&{}&{}&{}&{E5-2680 v3 @ 2.50GHz, 16 FLOPs/ cycle} \\ \hline
-{Sustained efficiency}&{FLOP/ cycle}&{13.60}&&&& \\ \hline
-{Sustained FLOP/ sec per core}&{FLOP/ core/ sec}&{3.4E+10}&&&& \\ \hline
+\textbf{Parameters}&\textbf{units}&\textbf{}&\textbf{}&\textbf{}&\textbf{}&\textbf{Notes} \\ \hline
 {HSC PDR1 Input Images}&{TB}&{13.7}&{}&{}&{}&{7238 visits of 104 CCDs} \\ \hline
-{HSC PDR1 small-memory compute}&{core-hours}&{64392}&{}&{}&{}&{measured} \\ \hline
-{HSC PDR1 high-memory compute}&{core-hours}&{78523}&{}&{}&{}&{measured} \\ \hline
-{Additional DRP steps}&{factor}&{1.5}&{}&{}&{}&{image differencing, stackfit, etc.} \\ \hline
-{DRP FLOPs per TB of input visits}&{FLOP/ TB}&{3.2E+18}&{}&{}&{}&{based on sustained FLOPS} \\ \hline
-{ap\_pipe sec/ CCD}&{core-sec/ CCD}&{83}&{}&{}&{}&{measured} \\ \hline
-{Additional AP steps}&{factor}&{0.25}&{}&{}&{}&{DCR, real\_bogus, etc.} \\ \hline
-{AP FLOPs per visit}&{FLOP}&{6.7E+14}&{}&{}&{}&{based on sustained FLOPS} \\ \hline
+{HSC PDR1 small-memory compute}&{core-hours}&{64392}&{}&{}&{}&{measured on E5-2680 v3 @ 2.50GHz} \\ \hline
+{HSC PDR1 high-memory compute}&{core-hours}&{78523}&{}&{}&{}&{measured on E5-2680 v3 @ 2.50GHz} \\ \hline
+{Small-memory DRP algorithm ratio}&{factor}&{1.5}&{}&{}&{}&{image differencing, etc.} \\ \hline
+{High-memory DRP algorithm ratio}&{factor}&{2.5}&{}&{}&{}&{stackfit, etc.} \\ \hline
+{DRP compute per TB}&{core-hours/ TB}&{2.1E+04}&&&& \\ \hline
+{Percent DRP on high-memory}&{factor}&{67\%}&&&& \\ \hline
+{ap\_pipe single-core sec/ CCD}&{core-sec/ CCD}&{83}&{}&{}&{}&{measured} \\ \hline
+{Additional AP steps}&{factor}&{1.25}&{}&{}&{}&{DCR, real\_bogus, etc.} \\ \hline
+{AP compute per visit}&{core-hours/ visit}&{5.4E+00}&&&& \\ \hline
+{Qserv cores/ node}&{cores}&{18.24}&{}&{}&{}&{24 cores, 1.9 GHz} \\ \hline
+{Qserv data/ node}&{TB}&{18}&&&& \\ \hline
 \end{longtable} \normalsize
