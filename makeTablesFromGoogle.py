@@ -125,6 +125,7 @@ def genTables(values):
     else:
         cols = 0
         skip = 0
+        bold_next = False
         for row in values:
             if (row and 'Table' in row[0]):  # got a new table
                 if name:
@@ -139,11 +140,15 @@ def genTables(values):
                 skip = int(row[3])
 
                 outhead(cols-skip, tout, name, cap)
+                bold_next = True
             else:
                 if name and row:
-                    if row[0].startswith('Year') or row[0].startswith('Total'):
+                    if (row[0].startswith('Year')
+                            or row[0].startswith('Total')
+                            or bold_next):
                         # print header/total in bold
                         outputrow(tout, "\\textbf", row, cols, skip)
+                        bold_next = False
                     else:
                         outputrow(tout, "", row, cols, skip)
     outtail(tout)
