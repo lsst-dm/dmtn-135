@@ -212,22 +212,35 @@ Similarly, the overall DES compute figure of 21,000 core-hours per terabyte is v
 
 \subsection{Operations Sizing}
 
-Four tables use some of the parameters from the above model to project LSST storage and compute needs throughout the 10~years of Operations.
+Five tables use some of the parameters from the above model to project LSST storage and compute needs throughout the 10~years of Operations.
 
 \subsubsection{Storage in Operations}
 
-\input{storageSizingOps}
+\afterpage{
+  \clearpage
+  \begin{landscape}
+      \input{storageSizingOps}
+      \input{datasetSizingOps}
+  \end{landscape}
+  \clearpage
+}
 
 The Object, Source, and ForcedSource numbers in \tabref{tab:storageSizingOps} are taken from \citeds{LSE-81}, as before.
 The number of science users and storage per user is ramped up.
 Note that the number of images needing storage and processing grows linearly with time.
 Table row sizes are taken from \citeds{LDM-141}; they include growth over time as columns are added.
 
-\input{datasetSizingOps}
-
 The dataset sizes in \tabref{tab:datasetSizingOps} are calculated using the same formulas and proportionality constants as in \tabref{tab:datasetSizing}.
 
-\input{storageFloorOps}
+\afterpage{
+  \clearpage
+  \begin{landscape}
+      \input{storageFloorOps}
+      \input{chileStorageOps}
+      \input{computeSizingOps}
+  \end{landscape}
+  \clearpage
+}
 
 The on-the-floor storage estimates in \tabref{tab:storageFloorOps} include fast (SSD) storage for the APDB and Qserv Czar, with the latter being sized for three Data Releases (two being served and one being prepared).
 
@@ -240,13 +253,9 @@ Lossy-compressed PVIs, and catalogs in Parquet format are also moved there, with
 
 All data products and new raw images for each Data Release are copied to tape.
 
-\input{chileStorageOps}
-
 \tabref{tab:chileStorageOps} extracts the Qserv and object store sizing needed to populate the Chilean DAC with a copy of the data products and raw images.
 
 \subsubsection{Compute in Operations}
-
-\input{computeSizingOps}
 
 The DRP compute sizing in \tabref{tab:computeSizingOps} follows directly from the size of the input data to be processed.
 The number of cores for Alert Production does not change with time.
