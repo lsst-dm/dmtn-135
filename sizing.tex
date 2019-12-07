@@ -190,7 +190,7 @@ Peak loads are expected to be handled by "borrowing" elastically from the DRP co
 
 As a reasonableness check, the number of cores per science user is computed, but it must be noted that an oversubscription factor needs to be taken into account since not all users are expected to be simultaneously active.
 
-Similar computations for the Chilean DAC (at 20\% of the US DAC) and the LSST saff LSP (at 10\% of the US DAC) are also in \tabref{tab:lspSizing}.
+Similar computations for the Chilean DAC (at 20\% of the US DAC) and the LSST staff LSP (at 10\% of the US DAC) are also in \tabref{tab:lspSizing}.
 
 Note that staff use of Qserv is taken into account by loading the Data Release products into an internal-only Qserv instance and then making that instance part of the DAC at Data Release, so the compute sizing is part of the US DAC.
 
@@ -208,3 +208,46 @@ The single-frame processing measured number of 5.2~core-hours per visit compares
 Similarly, the overall DES compute figure of 21,000 core-hours per terabyte is virtually identical to our estimate (including the factors for additional steps).
 
 \input{desComparison}
+
+
+\subsection{Operations Sizing}
+
+Four tables use some of the parameters from the above model to project LSST storage and compute needs throughout the 10~years of Operations.
+
+\subsubsection{Storage in Operations}
+
+\input{storageSizingOps}
+
+The Object, Source, and ForcedSource numbers in \tabref{tab:storageSizingOps} are taken from \citeds{LSE-81}, as before.
+The number of science users and storage per user is ramped up.
+Note that the number of images needing storage and processing grows linearly with time.
+Table row sizes are taken from \citeds{LDM-141}; they include growth over time as columns are added.
+
+\input{datasetSizingOps}
+
+The dataset sizes in \tabref{tab:datasetSizingOps} are calculated using the same formulas and proportionality constants as in \tabref{tab:datasetSizing}.
+
+\input{storageFloorOps}
+
+The on-the-floor storage estimates in \tabref{tab:storageFloorOps} include fast (SSD) storage for the APDB and Qserv Czar, with the latter being sized for three Data Releases (two being served and one being prepared).
+
+"Normal" filesystem storage holds raw images, data products, scratch space, Qserv data prior to loading, science user workspace, and a 20\% allocation for everything else.
+
+Qserv local storage holds catalogs for three Data Releases.
+
+Raw images (lossless-compressed) are copied to object storage.
+Lossy-compressed PVIs, and catalogs in Parquet format are also moved there, with sizing for three Data Releases.
+
+All data products and new raw images for each Data Release are copied to tape.
+
+\input{chileStorageOps}
+
+\tabref{tab:chileStorageOps} extracts the Qserv and object store sizing needed to populate the Chilean DAC with a copy of the data products and raw images.
+
+\subsubsection{Compute in Operations}
+
+\input{computeSizingOps}
+
+The DRP compute sizing in \tabref{tab:computeSizingOps} follows directly from the size of the input data to be processed.
+The number of cores for Alert Production does not change with time.
+The DAC and staff LSP instances are sized based on the assumed percentages of DRP compute, with Qserv sized based on its catalog data size.
