@@ -159,11 +159,16 @@ def main(sheetId, sheets):
     """
     grab the googlesheet and process tables in each sheet
     """
-    credentials = get_credentials()
-    http = credentials.authorize(httplib2.Http())
     discoveryUrl = ('https://sheets.googleapis.com/$discovery/rest?'
                     'version=v4')
-    service = discovery.build('sheets', 'v4', http=http,
+    if "GOOGLE_API_KEY" in os.environ:
+        http = httplib2.Http()
+        key = os.environ["GOOGLE_API_KEY"]
+    else:
+        credentials = get_credentials()
+        http = credentials.authorize(httplib2.Http())
+        key = None
+    service = discovery.build('sheets', 'v4', http=http, developerKey=key,
                               discoveryServiceUrl=discoveryUrl)
 
     for r in sheets:
