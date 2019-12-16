@@ -25,8 +25,10 @@ Some scratch space is provided to hold small, temporary intermediates.
 If some intermediates could be removed during DRP when it is known they will no longer be needed, some space savings could be realized.
 \item HSC RC2 processing is representative of the outputs that DRP will generate.
 In particular, the number of coadds and the presence or absence of "heavy footprints" are assumed to be correct.
-\item Raw science images, processed visit images (PVIs), coadds, and catalogs in Parquet format start on "normal" filesystem disk but then move to object storage at the completion of the DRP, with lossy compression of the PVIs at that time.
+\item Processed visit images (PVIs) and catalogs in Parquet format start on "normal" filesystem disk but then move to object storage at the completion of the DRP, with lossy compression of the PVIs at that time.
 This is in accordance with \jira{RFC-325}, although the relevant LCR has not yet been approved.
+\item Raw images are only temporarily stored on filesystem disk and are then rapidly moved to object storage, where they are retained.
+\item Coadd images are generated and kept on filesystem disk.
 \item Intermediates like warped images for coaddition are not survey data products and do not need to be kept beyond the end of the DRP and subsequent QA.
 \end{itemize}
 
@@ -140,8 +142,8 @@ Key scientific and algorithmic assumptions are:
 While certain tasks are undoubtedly proportional to sky area or number of Objects, overall the pipeline elapsed times are a better fit to the number of visits.
 Some of this may be because the Object density increases as the number of visits to the same sky patch increases.
 \item HSC PDR1 processing is generally representative of the final DRP, with an allocation for future additional steps as described below.
-\item Qserv core counts should remain proportional to the size of data loaded into the database in order to maintain sufficient disk bandwidth and query processing capability.
-\item The US DAC LSP is sized at 10\% of the DRP compute budget.
+\item Qserv nnode counts should remain proportional to the size of data loaded into the database in order to maintain sufficient disk bandwidth and query processing capability, but the proportionality constant changes with time as new generations of system bus with greater bandwidth become available.
+\item The US DAC LSP is sized at 10\% of the DRP compute budget in core-hours, readjusted to be spread over an entire year.
 The Chilean DAC LSP is sized at 20\% of the US DAC (as in \citeds{LDM-138}).
 The LSST staff LSP is sized at 10\% of the US DAC.
 \end{itemize}
@@ -153,7 +155,7 @@ HSC PDR1 was executed on the NCSA verification cluster, which uses the nominal C
 The Alert Production executes on Kubernetes nodes, which are a bit slower; to be conservative, this is neglected.
 
 The most recent run of DRP on HSC PDR1 data is described at \url{https://confluence.lsstcorp.org/x/WpBiB}.
-The input data size is measured.
+The input data size is measured; note that the input data files are lossless-compressed.
 Most jobs (but not most of the time) could run on relatively small-memory machines with 24~cores and 5~GB RAM per core.
 The largest and longest-running jobs, however, required up to 4~times as much memory, using half or a quarter of the cores.
 To be conservative, we assume that half the cores were used for the large-memory jobs.
@@ -167,9 +169,12 @@ A mean was taken over all processed CCDs, and it was assumed that each CCD is pr
 A factor is added to account for additional steps like differential chromatic refraction compensation and false positive detection that are not well-represented in the current pipeline.
 Multiplying by the number of LSSTCam science CCDs gives the total number of core-hours per visit.
 
+The amount of Qserv data that can be handled by one node is estimated based on the amount of disk that can be scanned in 12~hours at an aggregate rate of 1~GB per second.
+(Since the Qserv data replicas are not all anticipated to be accessed at the same rate, this is a conservative estimate.)
+
 \subsubsection{Data Release Production}
 
-The number of nominal core-hours per TB of input data is multiplied by the precursor (HSC RC2 and DESC DC2 subset for 12~months and HSC PDR2 twice a year) and LSSTCam input data sizes to determine the total number of core-hours needed in each year.
+The number of nominal core-hours per TB of input data is multiplied by the precursor (HSC RC2 and DESC DC2 subset for 12~months and HSC PDR2 twice a year) and LSSTCam input data sizes (with lossless compression) to determine the total number of core-hours needed in each year.
 This is shown in \tabref{tab:drpAndAlertSizing}.
 Approximately one-third of these core-hours need to be provided by small-memory (4-5~GB/core) machines; the other two-thirds need to come from large-memory (8-20~GB/core) machines.
 
@@ -192,6 +197,7 @@ As a reasonableness check, the number of cores per science user is computed, but
 
 Similar computations for the Chilean DAC (at 20\% of the US DAC) and the LSST staff LSP (at 10\% of the US DAC) are also in \tabref{tab:lspSizing}.
 
+The number of Qserv nodes needed is computed from the storage devoted to it and the storage per node number.
 Note that staff use of Qserv is taken into account by loading the Data Release products into an internal-only Qserv instance and then making that instance part of the DAC at Data Release, so the compute sizing is part of the US DAC.
 
 \input{lspSizing}
@@ -259,4 +265,6 @@ All data products and new raw images for each Data Release are copied to tape.
 
 The DRP compute sizing in \tabref{tab:computeSizingOps} follows directly from the size of the input data to be processed.
 The number of cores for Alert Production does not change with time.
-The DAC and staff LSP instances are sized based on the assumed percentages of DRP compute, with Qserv sized based on its catalog data size.
+The DAC and staff LSP instances are sized based on the assumed percentages of DRP compute.
+The amount of Qserv data that can be handled by a node is assumed to grow with time, doubling every four years (PCI Express has gone from 1.0~GB/sec to 16~GB/sec between 2003 and 2019).
+The number of Qserv nodes is calculated by dividing each Data Release's storage by the storage-per-node figure for its year; older nodes are assumed to be retired.
