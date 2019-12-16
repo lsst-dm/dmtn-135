@@ -1,27 +1,27 @@
 \tiny \begin{longtable} { |p{0.22\textwidth}  |r  |r  |r  |r  |r  |r  |r |} 
 \caption{Inputs on dataset sizes used to calculate storage needs \label{tab:datasetSizing}}\\ 
 \hline 
-{Dataset Sizing}&{unit}&{FY2020}&{FY2021}&{FY2022}&{FY2023/ LOY1}&{Notes} \\ \hline
-{HSC RC2 Area}&{deg\^2}&{3.0}&&&& \\ \hline
-{HSC SSP PDR2 Area}&{deg\^2}&&&&& \\ \hline
-{DESC DC2 Area}&{deg\^2}&{300}&&&& \\ \hline
+\textbf{Dataset Sizing}&\textbf{unit}&\textbf{FY2020}&\textbf{FY2021}&\textbf{FY2022}&\textbf{FY2023/ LOY1}&\textbf{Notes} \\ \hline
+{HSC RC2 Area}&{deg\^2}&{3.0}&{3.0}&{3.0}&{3.0}& \\ \hline
+{HSC SSP PDR2 Area}&{deg\^2}&{300}&{300}&{300}&{300}& \\ \hline
+{DESC DC2 Area}&{deg\^2}&{300}&{300}&{300}&{300}& \\ \hline
 {LSSTCam Area}&{deg\^2}&{}&{}&{2000}&{17000}& \\ \hline
 {APDB}&{TB}&{12}&{24}&{24}&{24}&{4.5/ 57K TB per visit; 1 year retention; 6 months in 2020} \\ \hline
 {HSC RC2 Input Images}&{TB}&{0.8}&{0.8}&{0.8}&{0.8}&{428 visits * 104 CCDs * 18.2 MB uncompressed} \\ \hline
 {HSC RC2 Output Images}&{TB}&{2.4}&{2.4}&{2.4}&{2.4}&{lossless-compressed, not including warps} \\ \hline
 {HSC RC2 Output Coadd Images}&{TB}&{0.7}&{0.7}&{0.7}&{0.7}&{lossless-compressed} \\ \hline
 {HSC RC2 Output Catalogs}&{TB}&{1.4}&{1.4}&{1.4}&{1.4}& \\ \hline
-{HSC SSP PDR2 Input Images}&{TB}&{27.4}&{27.4}&{27.4}&{27.4}&{14476 visits * 104 CCDs * 18.2 MB uncompressed (2 * PDR1)} \\ \hline
+{HSC SSP PDR2 Input Images}&{TB}&{93.3}&{93.3}&{93.3}&{93.3}&{2564358 CCDs * 18.2 MB uncompressed (3 * PDR1)} \\ \hline
 {DESC DC2 Input Images}&{TB}&{455}&{455}&{455}&{455}&{300 sq deg, 10 year depth} \\ \hline
 {LSSTCam Raw Images}&{TB}&{319}&{557}&{1290}&{4816}&{compressed, moves to object store} \\ \hline
-{Precursor Output Images}&{TB}&{236}&{236}&{236}&{236}&{monthly RC2 and DC2 subset plus biannual PDR} \\ \hline
-{Precursor Output Parquet}&{TB}&{130}&{130}&{130}&{130}& \\ \hline
+{Precursor Output Images}&{TB}&{763}&{763}&{763}&{763}&{monthly RC2 and DC2 subset plus biannual PDR} \\ \hline
+{Precursor Output Parquet}&{TB}&{361}&{361}&{361}&{361}& \\ \hline
 {LSSTCam Output Images}&{TB}&{}&{}&{2248}&{13485}&{lossless-compressed, moves to object store} \\ \hline
 {LSSTCam Output Coadd Images}&{TB}&{}&{}&{455}&{3864}& \\ \hline
 {LSSTCam Output Parquet}&{TB}&{}&{}&{1329}&{7973}& \\ \hline
 {Scratch}&{TB}&{}&{}&{225}&{1349}&{10\% of output images} \\ \hline
-{Qserv Czar/ Object}&{TB}&{}&{}&{8}&{51}&{based on row sizes and counts} \\ \hline
-{Qserv Database}&{TB}&{394}&{394}&{569}&{3417}&{based on Parquet for preliminary; based on row sizes and counts} \\ \hline
-{Science User Home}&{TB}&{0}&{1}&{250}&{500}& \\ \hline
-{Other/ Misc}&{TB}&{316}&{366}&{1450}&{7266}&{20\% of total} \\ \hline
+{Qserv Czar/ Object}&{TB}&{}&{}&{26}&{156}&{based on row sizes and counts} \\ \hline
+{Qserv Database}&{TB}&{1088}&{1088}&{585}&{3510}&{based on Parquet for preliminary; based on row sizes and counts} \\ \hline
+{Science User Home}&{TB}&{5}&{20}&{1000}&{2000}& \\ \hline
+{Other/ Misc}&{TB}&{620}&{673}&{1772}&{7771}&{20\% of total} \\ \hline
 \end{longtable} \normalsize

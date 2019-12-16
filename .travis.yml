@@ -7,8 +7,12 @@ python:
   - '3.7'
 before_install:
   - pip install 'lander>=0.1.0,<0.2'
+  - pip install 'google-api-python-client'
+  - pip install 'oauth2client'
+  - pip install 'httplib2'
 script:
   # Compile PDF using containerized lsst-texmf
+  - make tables
   - docker run --rm -v `pwd`:/workspace -w /workspace lsstsqre/lsst-texmf:latest sh
     -c 'make'
   # Deploy website. See https://github.com/lsst-sqre/lander for CLI options
@@ -31,3 +35,6 @@ env:
     -
       # LTD_KEEPER_URL
       secure: Pi6TRmwTZJ863jMiAgCLw+ezF9CrWwMdY37djKUOsXUXL2l4f5VAMmfLDjafU+5+rLmq6O3xSl9tC10g5OTQDW5Z6FaMN4ILtDXvlWhmZ6tLtpkAjje1xWvtHV8deYtzCHo+UhF6X5kXOCacWdANRNhraHS+opoUv+UvFvaEh5r7KvIAda1YjckjzUqNv+iFVORAkdR5tHpQi1GBsovoxug+2fsAetpGYcZzbCN8lEa7uGlBadtBFTc95wMmlV7V6jxtgjcTGK7qbUWHfgDdptPMeBYw1e/rv4GVbHiXarZosYX4jqEoRE8NZDr488sT99D+kKWcMLMBwpannFNwVab8YAeDJK6eMO4L9cZfbVYt1WKW/Up3ee1W/UhInIVmmvGgrkA5Z12OD3pYSfBeKOSxkf1DNXO8MN/iLN6y6crESKvKHEOiTKvwmBXHDl1ANyX1rzPOhyR/5S35Sv3KbwtMtc8qz83p5sRymerCJLRWYPsiJ18NT9naIe1kC92gJO3/yKL+swnnQrVZcr++749YWc5HPibviUD0H8/6PR1dYKtQOtDH+YrihbEa0iSUeONTOzL2tbRbInyR2En9ksAepP0/VUYeYKseSJ0LFnp/uJWAmhGHzX9lWf8s+mcoGddDIcQrLJ/y3RoCx6EeMjzKfi4oKJ2CB7KlIKxcMME=
+    -
+      # GOOGLE_API_KEY
+      secure: BvsnAN18OwBPDrTrE0PZO/4JaVTNOXdZ1XL3NLbFq8B5a9PzDIuijMamgNjLCPSdKY6M+M/OSFUl3R6Kv5s/Zw0XEmq9khTYbywG7o3gypXbxcJL9klXE9AtPhCGegKdcNuRXMYoowgr2KXJzzGY9hz3dnCS5XsBfn4OobrzilYTOGgstQoBEBpnukhAIMuKvTOukk1M0Zta6qwyot3eE5glczqXYddG5psxGgpxZ4OwUAf/jplH2uAy3KlFBX4x3GEdAhh3YgID8wwkGQxYXQBwlCj90huDUlLfYkmXcYDCbZqK6rIG9OFL5QzLAQi2s5K/EhrQR0fN+E+Y401Ylxsx1wDLWYvMsQ6od1JBgH3OclHGiTGnQxcXeVZ7m1bFD2vJBRg2NbMh+MbFjSy/IRPjRRfRbuoorew4e/fPEIvDUDpLH3q9A/M2IYCWZ1zS/dm2f6VeYVTsYGINvlJy1Oj4fDypq9ha9I0t2BYc7gyvlAV9Gy5X81C+viZjJoGQuCWuPT0k6K6LIaw4SIpYgr5yBj924A5NmupuIX+NW9dZE3tAgM+7o3RxPIvT3aqRGruR+PwcQ3OpCzHO95q1ZOuic1gs7DUlPEt4QQWtp664LmpVUhqZToqhn+PfSwfpT70mvaYpB8w/Ex8AR5PBndRtsymMta94/aLUSLCberU=
