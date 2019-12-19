@@ -276,10 +276,11 @@ The on-the-floor storage estimates in \tabref{tab:storageFloorOps} include fast 
 
 Qserv local storage holds catalogs for three Data Releases.
 
-Raw images (lossless-compressed) are copied to object storage.
-Lossy-compressed PVIs, and catalogs in Parquet format are also moved there, with sizing for three Data Releases.
+Raw images (lossless-compressed) are written immediately to object storage, as are Parquet-format catalogs.
+PVIs are lossy-compressed and placed in object storage.
+The complete set of raw images is available, whereas the catalogs from only the last two Data Releases and the one in preparation are kept, and the PVIs from only the last Data Release and the one in preparation are online.
 
-All data products and new raw images for each Data Release are copied to tape.
+All data products and new raw images for each Data Release are copied to tape, but scratch space and the Qserv-schema catalogs are not.
 
 \tabref{tab:chileStorageOps} extracts the Qserv and object store sizing needed to populate the Chilean DAC with a copy of the data products and raw images.
 
