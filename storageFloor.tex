@@ -3,9 +3,18 @@
  \label{tab:storageFloor}}\\ 
 \hline 
 \textbf{Storage Sizing (on the floor)}&\textbf{unit}&\textbf{FY2020}&\textbf{FY2021}&\textbf{FY2022}&\textbf{FY2023/ LOY1}&\textbf{Notes} \\ \hline
-{Fast}&{TB}&{12}&{24}&{50}&{206}&{SSD} \\ \hline
-{Normal}&{TB}&{3391}&{3459}&{9317}&{41786}&{Enterprise-grade SATA} \\ \hline
-{Qserv Storage}&{TB}&{1088}&{1088}&{585}&{4094}&{Local consumer-grade SATA} \\ \hline
-{Object Store}&{TB}&{319}&{876}&{4057}&{20217}& \\ \hline
-{Tape}&{TB}&{3710}&{7727}&{18333}&{64935}& \\ \hline
+{APDB}&{TB}&{12}&{24}&{24}&{24}& \\ \hline
+{Qserv Czar/ Object}&{TB}&{}&{}&{26}&{182}&{accumulates with time} \\ \hline
+\textbf{Total Fast}&\textbf{TB}&\textbf{12}&\textbf{24}&\textbf{50}&\textbf{206}&\textbf{SSD, sum of previous two rows} \\ \hline
+\textbf{Total Normal}&\textbf{TB}&\textbf{3680}&\textbf{3748}&\textbf{9241}&\textbf{38983}&\textbf{enterprise-grade SATA} \\ \hline
+\textbf{Total Qserv Storage}&\textbf{TB}&\textbf{1088}&\textbf{1088}&\textbf{585}&\textbf{4094}&\textbf{local consumer-grade SATA, accumulates with time} \\ \hline
+{LSSTCam Raw Images}&{TB}&{319}&{876}&{2166}&{6982}&{accumulates with time} \\ \hline
+{LSSTCam Output Images}&{TB}&{}&{}&{562}&{3933}&{lossy-compressed, accumulates with time} \\ \hline
+{LSSTCam Output Coadd Images}&{TB}&{}&{}&{909}&{8636}&{accumulates with time} \\ \hline
+{LSSTCam Output Parquet}&{TB}&{}&{}&{1329}&{9302}&{accumulates with time} \\ \hline
+\textbf{Total Object Store}&\textbf{TB}&\textbf{319}&\textbf{876}&\textbf{4966}&\textbf{28854}&\textbf{consumer-grade SATA, sum of previous four rows} \\ \hline
+{LSSTCam Raw Images}&{TB}&{319}&{876}&{2166}&{6982}&{accumulates with time} \\ \hline
+{All Data Products/ Backup}&{TB}&{2592}&{5252}&{13658}&{47626}&{normal storage minus Qserv/ scratch, accumulates with time} \\ \hline
+{All Object Store-Only Products}&{TB}&{0}&{0}&{909}&{8636}&{accumulates with time} \\ \hline
+\textbf{Total Tape}&\textbf{TB}&\textbf{2910}&\textbf{6128}&\textbf{16733}&\textbf{63245}&\textbf{sum of previous three rows} \\ \hline
 \end{longtable} \normalsize
