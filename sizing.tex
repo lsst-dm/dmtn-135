@@ -155,8 +155,12 @@ The pipelines have advanced considerably in terms of fidelity and science perfor
 Scaling compute needs based on an execution of the nascent DRP pipeline on HSC PDR1 data and nightly executions of the nascent \texttt{ap\_pipe} pipeline on HiTS2015 data is thus appropriate, but the fact that several steps are still missing from these pipelines must be taken into account.
 
 Elapsed times are measured on existing hardware and converted into core-hours on a nominal CPU (Intel Xeon E5-2680v3 at 2.50~GHz).
+For example, if a pipeline running on precursor data took an average of one hour on a 32-core nominal CPU, 32 core-hours would be used as its compute requirement.
 This estimation methodology incorporates all I/O, memory bandwidth, cache miss, and other overheads into the core-hour measurement, simplifying calculations.
 Note that the nominal CPU does not evolve with time; if future CPUs do more work per core, the actual core-hours may be less than estimated here.
+
+Scaling to other CPUs of the same architecture is based on the ratios of nominal GHz clock rates and core counts.
+For different architectures (e.g. Rome), the scaling is based on the ratio of industry-reported achievable FLOPS for the two architectures.
 
 Key scientific and algorithmic assumptions are:
 \begin{itemize}
