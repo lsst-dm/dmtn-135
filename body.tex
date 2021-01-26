@@ -1,41 +1,26 @@
 % Tables from https://docs.google.com/spreadsheets/d/1DiFTjsC4dP8XyOV7-uF0zwkl0r0jMuW9U9uELejpmn8/edit#gid=0
 \section{Introduction}
-The sizing and cost model for DM has not been revised since 2014. This document presents
-a simplified sizing model in \secref{sec:sizemodel} based on detailed sizing presented in \secref{sec:sizeinputs}.
+This document presents the simplified
+  sizing model for Rubin Observatory data management  in \secref{sec:sizemodel} based on detailed sizing presented in \secref{sec:sizeinputs}.
 \secref{sec:cost} presents a very high level budget summary for
 DM hardware.
 
-As we begin to consider operations one possibility would be to consider the DR1 hardware
-as an operations cost and only consider the commissioning hardware a construction cost.
-This is laid out in \secref{sec:scope}.
+This version is in agreement with SLAC on the parameters for CPU and disk price fall as well as CPU cost etc.
 
-\section{Proposed budget}\label{sec:cost}
+\section{Construction  budget}\label{sec:cost}
 
 A high level bottom line is given in \tabref{tab:Summary}.
-Since Xeon is more expensive that is the number used for the budget calculation, should we get Rome and it really performs we may save a little.
 The remainder of the document is all the details that went into that.
 
 \input{Summary}
 
-In \tabref{tab:Summary} we should note that IN2P3 do 50\% of processing so we reduce the processing cost by half. This does not
-reduce the storage cost. We have applied a modest cost reduction assuming that processors  and disks get a little cheaper - that
+We have applied a modest cost reduction assuming that processors  and disks get a little cheaper - that
 percentage is given in \tabref{tab:Inputs} along with many other parameters. \tabref{tab:Inputs} also contains the number of nodes we assume to need for Qserv.
 
 Specific  costs for storage are detailed in \tabref{tab:Storage} and for compute in \tabref {tab:Machines}
 the following budgets can be considered. The detailed annual purchasing based on those prices is given for
-storage in \tabref{tab:StorageCost} and for compute in \tabref{tab:Xeon}.
+storage in \tabref{tab:StorageCost} and for compute in \tabref{tab:Rome}.
 
-\section{Potential scope option} \label{sec:scope}
-In the 2019 JSR we discussed the possibility of purchasing DR1 hardware as part of operations
-rather than DM construction.
-\tabref{tab:Scope} defines what this would be worth using the cost/sizing model in this document.
-The table also calls out explicitly the storage  and compute costs in Chile for the Data Access centre,
-these are not deducted but shown to give an idea as to the potential cost there.
-
-\input{Scope}
-
-Should we do this some contingency for extra hardware must be kept in DM construction as well as some manpower
-budget to aid with the transition to operations.
 
 \input{ops}
 
@@ -44,16 +29,16 @@ The summary table (\tabref{tab:Summary})  uses Xeon pricing for compute as shown
 \tabref{tab:Xeon}.
 \input{Xeon}
 
-An alternative architecture would be Rome - we have not tested this but if it performs well it may provide savings.
-\tabref{tab:Rome} gives the price of compute based on Rome -small and large only for comparison purposes - not used in
-the calculations.
+An alternative architecture would be Rome - SLAC have chosen this for the Ops pricing, \tabref{tab:Rome} gives the price of compute based on Rome -small and large.
+Rome large are used in the operations calculations.
 \input{Rome}
 
 \tabref{tab:StorageCost} gives the price of storage using all  types that we need.
 This would be needed regardless of the compute chosen.
 \input{StorageCost}
 
-\tabref{tab:overheadCost} gives the annual cost of hosting compute. This includes purchasing racks to house
+\tabref{tab:overheadCost} gives the annual cost of hosting compute at NCSA for construction.
+This includes purchasing racks to house
 new nodes etc.
 \input{overheadCost}
 
@@ -80,7 +65,7 @@ These tables are used as look ups for the cost models in \secref{sec:cost}
 
 \input{Storage}
 
-In \tabref{tab:Storage} we should consider for NVME for each TB with file system servers two DDN NVME box with GPFS servers.
+In \tabref{tab:Storage} we should consider for NVMe for each TB with file system servers two DDN NVMe box with GPFS servers.
 The price is based on the TOP performer with best price .
 The Normal price is for each TB with file system disks and servers locally attached to production resources.
 
