@@ -1,7 +1,7 @@
 .. image:: https://img.shields.io/badge/dmtn--135-lsst.io-brightgreen.svg
    :target: https://dmtn-135.lsst.io
-.. image:: https://travis-ci.com/lsst-dm/dmtn-135.svg
-   :target: https://travis-ci.com/lsst-dm/dmtn-135
+.. image:: https://github.com/lsst-dm/dmtn-135/workflows/CI/badge.svg
+   :target: https://github.com/lsst-dm/dmtn-135/actions/
 
 ####################################################################
 DM sizing model and purchase plan for the remainder of construction.
