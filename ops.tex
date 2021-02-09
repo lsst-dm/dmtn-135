@@ -1,6 +1,8 @@
 \section{Operations budget estimate}\label{sec:opscost}
 Based on the needs in \tabref{tab:opsInputs} and the costs in \tabref{tab:opsStorageCost} and \tabref {tab:Machines}
-we get the estimate presented in \tabref{tab:opsSummary}
+we get the estimate presented in \tabref{tab:opsSummary}.
+In \tabref{tab:opsSummary} we should note that IN2P3 do 50\%  and UKDF do 25\% of the processing so we reduce the processing cost by three quarters.
+This does not reduce the storage cost.
 
 \input{opsSummary}
 
@@ -13,11 +15,17 @@ in \tabref{tab:Storage}. An even bigger effect is in the compounding of the pres
 conservative 5\% per year (\tabref{tab:Inputs}) - changing this to 15\% halves the cumulative ops estimate, setting it to 10\% brings the
 total down by about 30\%.
 
+\subsection{Cloud costs}
+In addition there are some cloud costs. We run certain jobs and host websites on Amazon and Google. In operations
+the validation team may also wish to run simulations on cloud resources. This estimate is in \tabref{tab:cloud}.
+
+\input{cloud}
+
 
 More details on the inputs are in \secref{sec:opsdetails}
 
 \subsection{US and Chile}
-While \tabref{tab:opsSummary} present the total ops cost for Rubin Observatory a fraction of this is in Chile and would potentially remain an NSF cost in operations. \tabref{tab:opsSumUSSF} presents just the US Data Facility budget  and
+While \tabref{tab:opsSummary} present the total ops cost for Rubin Observatory a fraction of this is in Chile and would potentially remain an NSF cost in operations. \tabref{tab:opsSumUSDF} presents just the US Data Facility budget  and
 \tabref{tab:opsSumChile} presents the Chile budget.
 
 \input{opsSumUSDF}
