@@ -29,7 +29,6 @@ jobs:
           password: ${{ secrets.DOCKERHUB_SQREREADONLY_TOKEN }}
 
       - name: Generate table from google doc
-        uses: actions/setup-python@v2
         run: |
           make tables
         with:
