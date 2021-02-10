@@ -28,16 +28,13 @@ jobs:
           username: sqrereadonly
           password: ${{ secrets.DOCKERHUB_SQREREADONLY_TOKEN }}
 
-      - name: Generate table from google sheet
+
+      - name: TeX build
         env:
           CLIENT: ${{ secrets.SIZING_MODEL_ACCESS }}
         run: |
           echo $CLIENT >> client_secret.json
-          make tables
-
-      - name: TeX build
-        run: |
-          docker run --rm -v `pwd`:/workspace -w /workspace lsstsqre/lsst-texmf:latest sh -c 'make'
+          docker run --rm -v `pwd`:/workspace -w /workspace lsstsqre/lsst-texmf:latest sh -c 'make tables;make'
 
       - name: Landing page upload
         if: ${{ github.event_name == 'push' }}
