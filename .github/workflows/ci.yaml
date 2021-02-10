@@ -27,6 +27,12 @@ jobs:
         with:
           username: sqrereadonly
           password: ${{ secrets.DOCKERHUB_SQREREADONLY_TOKEN }}
+
+      - name: Generate table from google doc
+        uses: actions/setup-python@v2
+        with:
+          client_secret.json: ${{ secrets.SIZING_MODEL_ACCESS }}
+
       - name: TeX build
         run: |
           docker run --rm -v `pwd`:/workspace -w /workspace lsstsqre/lsst-texmf:latest sh -c 'make'
