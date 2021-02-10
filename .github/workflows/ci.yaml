@@ -30,6 +30,8 @@ jobs:
 
       - name: Generate table from google doc
         uses: actions/setup-python@v2
+        run: |
+          make tables
         with:
           client_secret.json: ${{ secrets.SIZING_MODEL_ACCESS }}
 
