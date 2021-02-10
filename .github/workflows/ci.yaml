@@ -28,11 +28,12 @@ jobs:
           username: sqrereadonly
           password: ${{ secrets.DOCKERHUB_SQREREADONLY_TOKEN }}
 
-      - name: Generate table from google doc
+      - name: Generate table from google sheet
+        env:
+          CLIENT: ${{ secrets.SIZING_MODEL_ACCESS }}
         run: |
+          echo $CLIENT >> client_secret.json
           make tables
-        with:
-          client_secret.json: ${{ secrets.SIZING_MODEL_ACCESS }}
 
       - name: TeX build
         run: |
