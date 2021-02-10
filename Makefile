@@ -29,6 +29,8 @@ acronyms.tex: $(tex) myacronyms.txt
 aglossary.tex :$(tex) myacronyms.txt
 	generateAcronyms.py  -g $(tex)
 
+gdepend:
+	pip install --upgrade google-api-python-client google-auth-httplib2  google-auth-oauthlib
 tables:
 	makeTablesFromGoogle.py 1DiFTjsC4dP8XyOV7-uF0zwkl0r0jMuW9U9uELejpmn8 Model\!A1:H Storage\!A1:H Compute\!A1:H "Ops Storage"\!A1:L "Ops Compute"\!A1:L "Ops Costs"\!A1:L "Cloud"\!A1:M9 "PreOps"\!A1:E
 
