@@ -31,10 +31,8 @@ jobs:
       - name: make tables from google
         env:
           CLIENT: ${{ secrets.SIZING_MODEL_ACCESS }}
-          TOKEN: ${{ secrets.TOKEN }}
         run: |
           echo $CLIENT >> client_secret.json
-          echo $TOKEN >> token.pickle
           docker run --rm -v `pwd`:/workspace -w /workspace lsstsqre/lsst-texmf:latest sh -c 'make gdepend tables'
 
       - name: TeX build
