@@ -34,7 +34,7 @@ jobs:
           TOKEN_PASSPHRASE: ${{ secrets.TOKEN_PASSPHRASE }}
         run: |
           echo $CLIENT >> client_secret.json
-          decrypt_secret.sh
+          ./decrypt_secret.sh
           docker run --rm -v `pwd`:/workspace -w /workspace lsstsqre/lsst-texmf:latest sh -c 'make gdepend tables'
 
       - name: TeX build
