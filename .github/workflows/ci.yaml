@@ -27,6 +27,16 @@ jobs:
         with:
           username: sqrereadonly
           password: ${{ secrets.DOCKERHUB_SQREREADONLY_TOKEN }}
+
+      - name: make tables from google
+        env:
+          CLIENT: ${{ secrets.SIZING_MODEL_ACCESS }}
+          TOKEN_PASSPHRASE: ${{ secrets.TOKEN_PASSPHRASE }}
+        run: |
+          echo $CLIENT >> client_secret.json
+          ./decrypt_secret.sh
+          docker run --rm -v `pwd`:/workspace -w /workspace lsstsqre/lsst-texmf:latest sh -c 'make gdepend tables'
+
       - name: TeX build
         run: |
           docker run --rm -v `pwd`:/workspace -w /workspace lsstsqre/lsst-texmf:latest sh -c 'make'
