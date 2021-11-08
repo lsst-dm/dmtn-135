@@ -98,6 +98,7 @@ A simple linear scaling to a full year's visits was performed, with half that pu
 
 HyperSuprime-Cam (HSC) RC2 is a relatively small dataset used for monthly processing tests, but it is highly representative of the currently-known DRP work and so is used as the basis for scaling.
 The size of the input images was taken from \cite{DMTN-091}; the size of the outputs (image and Parquet/other non-image files) was measured from the latest execution.
+A correction factor is required since uncompressed HSC images are 2~bytes per pixel while uncompressed LSSTCam images are 4~bytes per pixel.
 A similar size dataset based on DESC DC2 is assumed to be being used for an additional monthly processing test.
 Note that this is a very small subset of the full DESC DC2, which is expected to cover 300~square degrees to 10-year LSST depth (approximately 1000 epochs per point on the sky).
 The full DESC DC2 is not currently scheduled to be reprocessed by the construction team.
