@@ -1,0 +1,125 @@
+\section{Operations status update (July 2026)}\label{sec:ops2026}
+
+Survey operations began in October 2025 (Loop Year 1 = FY2026). This section,
+prepared under \href{https://rubinobs.atlassian.net/browse/DM-49578}{DM-49578},
+records operations-era \emph{actuals} and deployed-hardware facts as of July
+2026. The construction-era tables elsewhere in this document are retained
+unchanged as the historical baseline; where a number below supersedes one of
+them, that is stated explicitly in \secref{sec:ops2026errata}. Anything not yet
+confirmed is labeled as such.
+
+\subsection{Live sizing model}\label{sec:ops2026model}
+
+The maintained successor to the spreadsheet behind this document's tables is a
+parameterized model (\texttt{sizing\_params.yaml} +
+\texttt{generate\_sizing\_model.py}) that emits two workbooks: the full model
+(\texttt{rubin\_sizing\_model\_2026.xlsx}) and a condensed communication
+workbook (\texttt{rubin\_usdf\_model\_2026\_condensed.xlsx}) with per-cell
+source attribution and a companion provenance factsheet.
+\textbf{[Placeholder: permanent published location of the sizing-model
+repository and workbooks to be added before merge --- currently maintained in
+the USDF sizing-model git repository.]}
+
+\subsection{DRP compute actuals}\label{sec:ops2026compute}
+
+Measured resource usage is documented in \url{https://rtn-109.lsst.io/}
+(RTN-109, ``DRP Resource Usage Estimates''):
+
+\begin{itemize}
+\item Data Preview 2 (DP2, $\sim$30k visits): 650 node-days on 120-core nodes
+      ($\approx$1.87M core-hours).
+\item DR1-scale projection from measured per-task usage: $16.416\times10^6$
+      core-hours for one survey-year of input ($\approx$798\,TB,
+      $\sim$210k visits), i.e.\ $\approx$20{,}571 core-hours per input TB.
+\end{itemize}
+
+These are task-level CPU numbers. Wall-clock inflation between tasks and
+between pipeline stages is \emph{not yet measured}: a multiplier of 1.3--1.5
+on concurrent cores has been suggested but remains unconfirmed (the current
+model uses 1.35 as a placeholder). Note that these actuals are substantially
+below the construction-era DR1 compute estimates in this document; partner
+facility provisioning agreed against earlier estimates therefore carries
+significant headroom.
+
+\subsection{DRP storage actuals}\label{sec:ops2026storage}
+
+From RTN-109 (compressed): DP2 total DRP output 7.43\,PB, of which release
+products 0.32\,PB; DR1 projection 47\,PB total, 1.6\,PB release products per
+survey-year. The \emph{distributed} early-DP2 (EDP2) subset is
+$\approx$59\,TB (DP2 paper draft, July 2026; EDP2 is a subset of full DP2 ---
+the two must not be conflated). Two operations-era products are not yet in the
+sizing model's per-visit output constants: object Scarlet models (11\,TB at
+EDP2 scale) and single-band HiPS maps ($\approx$18\,TB in $\sim$36M small
+files, which stresses filesystem metadata as well as capacity).
+
+\subsection{USDF deployed hardware (2026)}\label{sec:ops2026hw}
+
+The USDF is hosted at the SLAC Shared Scientific Data Facility (S3DF), not at
+NCSA as assumed during construction planning. Deployed as of 2026:
+
+\begin{itemize}
+\item Batch: 145 nodes (110 ``Milano'' + 35 ``Torino'', AMD EPYC class),
+      120 cores each = 17{,}400 cores.
+\item Kubernetes services: 75 nodes; interactive: 11 nodes.
+\item Storage: $\approx$30\,PB installed across flash (Weka), disk (Ceph),
+      object store, and tape tiers.
+\end{itemize}
+
+\subsection{Qserv catalog database}\label{sec:ops2026qserv}
+
+No citable hardware description of the operations Qserv cluster previously
+existed; the following is confirmed as of 2026-07-30 and serves as that
+reference. Deployments: a 35-node Kubernetes production cluster (serving DP2),
+a 35-node Kubernetes integration cluster, and a 6-node Docker-based
+integration cluster. Worker node configuration:
+
+\begin{itemize}
+\item CPU: 1 $\times$ AMD EPYC 7543P (32 cores, 64 hardware threads,
+      SMT enabled).
+\item RAM: 256\,GB.
+\item Storage: node-local NVMe (shared-nothing; no network storage in the
+      query path); 12 of 24 slots populated = 32\,TB raw per node; ZFS
+      automatic compression yields $\approx$2$\times$, i.e.\ $\approx$64\,TB
+      effective; populating the remaining slots would double raw capacity.
+\item Internal network: 100\,GbE. Data replication factor: 3.
+\end{itemize}
+
+Most USDF Kubernetes nodes share this hardware configuration. Which cluster
+will serve DR1 is to be confirmed.
+
+\subsection{International processing split}\label{sec:ops2026intl}
+
+This document's operations tables assume IN2P3 50\% / UKDF 25\% of DRP
+processing. Current working numbers (July 2026, \emph{provisional}):
+France/CC-IN2P3 40\%, UK/UKDF 40\%, USDF the residual 20\% plus all Alert
+Production, DAC/RSP, and Qserv/Kubernetes services. The UK figure derives from
+UKDF's stated provisioning of 40M core-hours/year, sized as 40\% of the DR1
+processing cost per an earlier version of this document; because measured DR1
+compute (\secref{sec:ops2026compute}) is far lower, capacity and cost-share
+percentages no longer coincide and the split awaits confirmation against the
+UKDF and FrDF facility spreadsheets. FrDF has executed DP2 stage2+ pilot
+campaigns, so multi-site DRP operation is exercised in practice.
+
+\subsection{Superseded construction-era numbers}\label{sec:ops2026errata}
+
+\begin{itemize}
+\item Hosting site: NCSA $\rightarrow$ SLAC S3DF.
+\item Visits per night: planning value 1000 $\rightarrow$ 700 (simulation-based,
+      300 observing nights/year); calibration frames 450/day.
+\item Raw exposure: 8.19\,GB logical, 0.464 on-disk compression
+      ($\approx$3.8\,GB on wire).
+\item DR1 DRP compute: construction-era estimates $\rightarrow$ 16.4M
+      core-hours (measured basis, RTN-109).
+\item International split: 50/25 $\rightarrow$ 40/40 (provisional, see
+      \secref{sec:ops2026intl}).
+\item Compute architecture: Xeon/Rome pricing exemplars $\rightarrow$ deployed
+      AMD EPYC Milan-class batch nodes and EPYC 7543P service nodes.
+\end{itemize}
+
+\subsection{Known unknowns}\label{sec:ops2026unknowns}
+
+Idle/inter-stage wall-clock multiplier (1.3--1.5, unmeasured); scratch and
+intermediate storage fraction (0.35 placeholder); Kubernetes allocatable
+cores-per-node reconciliation (planners list 48 vs 64 hardware threads,
+DM-54218); UK and France share confirmation; whether the DP2 paper's 59\,TB
+figure covers EDP2 only; DR1-scale sizes for Scarlet models and HiPS.
