@@ -26,8 +26,12 @@ Measured resource usage is documented in \url{https://rtn-109.lsst.io/}
 (RTN-109, ``DRP Resource Usage Estimates''):
 
 \begin{itemize}
-\item Data Preview 2 (DP2, $\sim$30k visits): 650 node-days on 120-core nodes
-      ($\approx$1.87M core-hours).
+\item Data Preview 2 (DP2, $\sim$30k visits): 970 node-days on 120-core
+      nodes ($\approx$2.79M core-hours), processed entirely on Milano-generation
+      nodes (per June 2026 DP2 performance metrics; an earlier figure of 650
+      node-days is superseded). Measured DP2 compute is $\approx$17\% of the
+      DR1 projection, versus the 10\% input fraction --- fixed per-campaign
+      overheads do not scale with input volume.
 \item DR1-scale projection from measured per-task usage: $16.416\times10^6$
       core-hours for one survey-year of input ($\approx$798\,TB,
       $\sim$210k visits), i.e.\ $\approx$20{,}571 core-hours per input TB.
@@ -59,7 +63,13 @@ NCSA as assumed during construction planning. Deployed as of 2026:
 
 \begin{itemize}
 \item Batch: 145 nodes (110 ``Milano'' + 35 ``Torino'', AMD EPYC class),
-      120 cores each = 17{,}400 cores.
+      120 cores each = 17{,}400 raw cores. The fleet is heterogeneous: Rubin
+      pipelines run $\approx$2$\times$ faster per core on Torino than Milano
+      across all tasks (Torino has $\approx$60\% higher base clock and larger
+      memory bandwidth). Since measured demand (DP2, DR1 calibration) is
+      Milano-based, capacity is better expressed as
+      $(110 + 35\times2)\times120 = 21{,}600$ Milano-equivalent cores. The
+      2$\times$ factor is empirical and should be re-measured per release.
 \item Kubernetes services: 75 nodes; interactive: 11 nodes.
 \item Storage: $\approx$30\,PB installed across flash (Weka), disk (Ceph),
       object store, and tape tiers.
@@ -90,14 +100,18 @@ will serve DR1 is to be confirmed.
 \subsection{International processing split}\label{sec:ops2026intl}
 
 This document's operations tables assume IN2P3 50\% / UKDF 25\% of DRP
-processing. Current working numbers (July 2026, \emph{provisional}):
-France/CC-IN2P3 40\%, UK/UKDF 40\%, USDF the residual 20\% plus all Alert
-Production, DAC/RSP, and Qserv/Kubernetes services. The UK figure derives from
-UKDF's stated provisioning of 40M core-hours/year, sized as 40\% of the DR1
-processing cost per an earlier version of this document; because measured DR1
-compute (\secref{sec:ops2026compute}) is far lower, capacity and cost-share
-percentages no longer coincide and the split awaits confirmation against the
-UKDF and FrDF facility spreadsheets. FrDF has executed DP2 stage2+ pilot
+processing. Current working numbers (August 2026, \emph{provisional}):
+France/CC-IN2P3 40\%; UK/UKDF a \emph{front-loaded, tapering} profile ---
+UKDF purchases were front-loaded to cover $\approx$40\% of first-year
+requirements, with later-year commitments reduced so that the work-weighted
+aggregate over the 10-year survey is $\approx$25\% (the year-by-year taper is
+not yet computed by UKDF; the working model uses 40\%/40\%/24\%$\ldots$,
+which meets the aggregate); USDF carries the per-year residual plus all Alert
+Production, DAC/RSP, and Qserv/Kubernetes services. UKDF's provisioned capacity
+is 40M core-hours/year; at measured DR1 scale
+(\secref{sec:ops2026compute}) the tapering profile keeps UK requirements
+within that provisioning through LOY10. The split awaits confirmation against
+the UKDF and FrDF facility spreadsheets. FrDF has executed DP2 stage2+ pilot
 campaigns, so multi-site DRP operation is exercised in practice.
 
 \subsection{Superseded construction-era numbers}\label{sec:ops2026errata}
@@ -110,7 +124,9 @@ campaigns, so multi-site DRP operation is exercised in practice.
       ($\approx$3.8\,GB on wire).
 \item DR1 DRP compute: construction-era estimates $\rightarrow$ 16.4M
       core-hours (measured basis, RTN-109).
-\item International split: 50/25 $\rightarrow$ 40/40 (provisional, see
+\item International split: IN2P3 50\%/UKDF 25\% flat $\rightarrow$
+      France 40\%; UK front-loaded $\approx$40\% of first-year requirements
+      tapering to a $\approx$25\% ten-year aggregate (provisional, see
       \secref{sec:ops2026intl}).
 \item Compute architecture: Xeon/Rome pricing exemplars $\rightarrow$ deployed
       AMD EPYC Milan-class batch nodes and EPYC 7543P service nodes.
@@ -121,5 +137,9 @@ campaigns, so multi-site DRP operation is exercised in practice.
 Idle/inter-stage wall-clock multiplier (1.3--1.5, unmeasured); scratch and
 intermediate storage fraction (0.35 placeholder); Kubernetes allocatable
 cores-per-node reconciliation (planners list 48 vs 64 hardware threads,
-DM-54218); UK and France share confirmation; whether the DP2 paper's 59\,TB
-figure covers EDP2 only; DR1-scale sizes for Scarlet models and HiPS.
+DM-54218); the UKDF year-by-year taper profile (only the 25\% aggregate and
+the 40\% first-year front-load are stated); France share and capacity
+confirmation; the origin of the DP2 compute excess over the 10\% input
+fraction ($\approx$17\% measured); the Torino/Milano per-core speedup at
+future release scales; whether the DP2 paper's 59\,TB figure covers EDP2
+only; DR1-scale sizes for Scarlet models and HiPS.
