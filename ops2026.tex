@@ -97,14 +97,21 @@ integration cluster. Worker node configuration:
 Most USDF Kubernetes nodes share this hardware configuration. Which cluster
 will serve DR1 is to be confirmed.
 
-Catalogue volume is measured rather than modelled for the data preview: the
-DP2 catalogue occupies $\approx$52\,TB on disk with $\approx$1\,TB of
-indexes, and its ingest inputs are 19\,TB compressed against 60\,TB
-uncompressed, giving a compression factor of $\approx$0.32. Sizing models
-that scale LDM-141 row sizes must apply that factor: omitting it overstates
-Qserv capacity by more than a factor of three. Extrapolating the measured
-point by visit count gives $\approx$370\,TB per copy for a DR1-scale
-catalogue.
+Catalogue volume is measured rather than modelled for the data preview. On the
+USDF deployment the DP2 catalogue occupies 33.4\,TB logically (chunk tables
+27.0\,TB plus overlap tables 6.4\,TB, of which 3.2\,TB is index), and
+66.9\,TB on disk at the current replication factor of two. Overlap regions are
+a second table per chunk holding rows from neighbouring chunks; they are
+additional bytes, and across the deployed catalogues they run between 6\% and
+24\% of chunk bytes depending on how much of a catalogue is director tables.
+
+Partitioning geometry is fixed and shared across a database family
+($numStripes = 340$, $numSubStripesPerStripe = 3$), so chunk count tracks sky
+area rather than data volume: DP2's 57,680 chunks already cover an estimated
+11,700\,deg$^2$ of the survey footprint, and chunk growth to DR1 is therefore
+modest. Sizing models that scale catalogue row sizes to a data release must
+apply an overlap allowance and the replication factor, and must not assume
+chunk count scales with visit count.
 
 \subsection{International processing split}\label{sec:ops2026intl}
 
