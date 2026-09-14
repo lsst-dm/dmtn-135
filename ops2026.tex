@@ -100,7 +100,9 @@ will serve DR1 is to be confirmed.
 Catalogue volume is measured rather than modelled for the data preview. On the
 USDF deployment the DP2 catalogue occupies 33.4\,TB logically (chunk tables
 27.0\,TB plus overlap tables 6.4\,TB, of which 3.2\,TB is index), and
-66.9\,TB on disk at the current replication factor of two. Overlap regions are
+66.9\,TB on disk at that deployment's replication factor of two. Production is
+intended to run at three-fold replication, which is the value sizing should use;
+the on-disk catalogue scales linearly with it. Overlap regions are
 a second table per chunk holding rows from neighbouring chunks; they are
 additional bytes, and across the deployed catalogues they run between 6\% and
 24\% of chunk bytes depending on how much of a catalogue is director tables.
