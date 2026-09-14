@@ -97,6 +97,15 @@ integration cluster. Worker node configuration:
 Most USDF Kubernetes nodes share this hardware configuration. Which cluster
 will serve DR1 is to be confirmed.
 
+Catalogue volume is measured rather than modelled for the data preview: the
+DP2 catalogue occupies $\approx$52\,TB on disk with $\approx$1\,TB of
+indexes, and its ingest inputs are 19\,TB compressed against 60\,TB
+uncompressed, giving a compression factor of $\approx$0.32. Sizing models
+that scale LDM-141 row sizes must apply that factor: omitting it overstates
+Qserv capacity by more than a factor of three. Extrapolating the measured
+point by visit count gives $\approx$370\,TB per copy for a DR1-scale
+catalogue.
+
 \subsection{International processing split}\label{sec:ops2026intl}
 
 This document's operations tables assume IN2P3 50\% / UKDF 25\% of DRP
