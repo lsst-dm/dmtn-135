@@ -113,7 +113,17 @@ area rather than data volume: DP2's 57,680 chunks already cover an estimated
 11,700\,deg$^2$ of the survey footprint, and chunk growth to DR1 is therefore
 modest. Sizing models that scale catalogue row sizes to a data release must
 apply an overlap allowance and the replication factor, and must not assume
-chunk count scales with visit count.
+chunk count scales with visit count. They must also apply filesystem
+compression exactly once: ZFS compression on the Qserv nodes is accounted for
+in the usable capacity per node, so the catalogue volume itself must be carried
+on an uncompressed basis.
+
+An independent planning estimate puts DR1 in Qserv at 2--3\,PB for a single
+copy, 6--9\,PB once replicated. The model described here arrives at
+1.45\,PB per copy from LDM-141 row sizes, about 0.58 of the midpoint of that
+range. The discrepancy is unresolved and is recorded here rather than
+reconciled by adjustment; closing it requires per-table row counts for a
+measured catalogue, which are not yet available.
 
 \subsection{International processing split}\label{sec:ops2026intl}
 
