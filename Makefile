@@ -40,8 +40,10 @@ sizing-tables:
 sizing-tables-check:
 	uv run --no-project --python 3.11 bin/sizing_tables.py --check
 
+# "Ops Storage" stops at row 74: rows 75+ hold two 2025 tables (dp2Sizing,
+# scaledSize) with no column-skip value, which makeTablesFromGoogle.py rejects.
 tables:
-	makeTablesFromGoogle.py 1DiFTjsC4dP8XyOV7-uF0zwkl0r0jMuW9U9uELejpmn8 Model\!A1:H Storage\!A1:H Compute\!A1:H "Ops Storage"\!A1:L "Ops Compute"\!A1:L "Ops Costs"\!A1:L "Cloud"\!A1:M9 "PreOps"\!A1:E "LDM-572 Chile"\!A1:L
+	makeTablesFromGoogle.py 1DiFTjsC4dP8XyOV7-uF0zwkl0r0jMuW9U9uELejpmn8 Model\!A1:H Storage\!A1:H Compute\!A1:H "Ops Storage"\!A1:L74 "Ops Compute"\!A1:L "Ops Costs"\!A1:L "Cloud"\!A1:M9 "PreOps"\!A1:E "LDM-572 Chile"\!A1:L
 
 .PHONY: clean sizing-tables sizing-tables-check
 clean:
