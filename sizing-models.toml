@@ -1,0 +1,16 @@
+# Sizing-model versions whose tables appear in the operations update.
+# Construction-era tables come from the Google sheet (`make tables`), not here.
+#
+# New model version: tag lsst/rubin-sizing-model, update `ref`, run
+# `make sizing-tables`, commit the tables with this file.
+# New scenario: add a [[model]] with its own params, output and macro_prefix
+# (letters only; must match tex_tables.macro_prefix in that params file).
+
+[[model]]
+name = "ops2026"
+repo = "https://github.com/lsst/rubin-sizing-model"
+ref = "v2026.09.2"
+params = "sizing_params.yaml"
+output = "update2026/tables"
+macro_prefix = "sm"
+consumers = ["update2026/*.tex"]

@@ -1,0 +1,146 @@
+\subsection{Reconciliation with the construction-era model}\label{sec:upreconcile}
+
+\subsubsection{The catalogue formula is reproduced}
+
+The construction-era model sized the Qserv database in
+\tabref{tab:datasetSizingOps} as
+\[
+  \bigl(N_{\mathrm{obj}}\,(r_{\mathrm{obj}} + r_{\mathrm{obj,extra}})
+        + N_{\mathrm{src}}\,r_{\mathrm{src}}
+        + N_{\mathrm{fs}}\,r_{\mathrm{fs}}\bigr) \times R ,
+\]
+which gives 3{,}509.56\,TB at LOY1. Multiplied by the overlap uplift of
+\smQsOverlap{}, that is exactly the 2026 DR1 figure of \smQsDRoneDiskTB{}\,TB.
+
+The two models share LDM-141 row counts and three-fold replication. The match
+therefore shows that the 2026 model follows the same arithmetic; it does not
+independently validate LDM-141. It also pins down three things:
+\begin{itemize}
+\item Neither model applies compression to the catalogue volume.
+\item The 2026 model adds the measured overlap; the construction-era model
+      had none.
+\item The construction-era LOY1 is a full data release. It corresponds to the
+      2026 DR1 column, not the DP2 column.
+\end{itemize}
+
+\subsubsection{Why the 2026 demand and cost differ}\label{sec:upwhy}
+
+\tabref{tab:smCompareVone} sets the construction-era operations demand, as
+published, against the 2026 model at the same number of survey years. Both
+assume all processing at the USDF. Most demand is lower in 2026, but not all
+of it, and the reasons are specific.
+
+\smpara{Raw input: \smCmpInputOne{} of the construction-era figure.}
+The construction-era tables give 1{,}911\,TB a year of compressed input from
+300 nights of 1000 visits, or 6.37\,GB per visit. They counted 4 bytes per pixel
+and kept two images per visit as the baseline (\secref{sec:sizeinputs}). The
+2026 model has 700 visits a night of 8.19\,GB logical at a compression of
+0.464, or 3.80\,GB per visit. Fewer visits (0.70) times less data per visit
+(0.60) gives 0.42.
+
+\smpara{DRP compute: \smCmpComputeOne{} at DR1, \smCmpComputeNine{} at DR9, in
+core-hours.}
+Less input is partly offset by a higher rate: \smChPerTB{} core-hours per input
+TB now, against about 23{,}500 implied by \tabref{tab:computeSizingOps}. That
+rate was scaled from HSC processing plus allowances for missing pipeline steps.
+The two figures are also in \emph{different units}: the construction-era
+core-hour is a 2015 Intel Xeon E5-2680v3 core, and the 2026 core-hour is a
+Milano core, which does more work per hour. The fall in core-hours therefore
+overstates any fall in the processing work itself.
+
+\smpara{On-floor disk: \smCmpDiskOne{}--\smCmpDiskNine{}.}
+Raw data on the floor is only \smCmpRawNine{} of the construction-era figure
+by DR9, following the smaller input. The rest of the disk is structured
+differently:
+\begin{itemize}
+\item The construction era held every significant intermediate on disk until
+      each campaign finished, kept catalogues from three releases in object
+      storage, and itemised science-user space.
+\item The 2026 model is dominated by live intermediates at an assumed
+      \smLiveFrac{} of each campaign's intermediates, plus a
+      \smOtherFrac{} allowance.
+\end{itemize}
+The comparison is therefore only as good as the live-intermediate fraction,
+which is unmeasured.
+
+\smpara{Tape: \smCmpTapeOne{} at DR1, \smCmpTapeNine{} at DR9.}
+This is the largest difference, and it comes from policy rather than
+measurement. The construction-era model archived all raw images and all data
+products, and also backed up every filesystem to tape, including annual
+snapshots (\secref{sec:sizeinputs}). The 2026 model archives raw data and the
+retained release products only. It adds no new backup of on-floor data,
+because a separate backup system already exists. If filesystem backups were
+restored to scope, tape would grow substantially.
+
+\smpara{Qserv: \smCmpQservOne{} at DR1, rising to \smCmpQservNine{}.}
+This is the one demand that is \emph{larger}, and the difference is the
+overlap allowance. Both models hold three releases in Qserv, and both apply
+the same catalogue formula to each release (\secref{sec:upreconcile}). The
+2026 model then multiplies each release by the measured overlap uplift of
+\smQsOverlap{}; the construction-era model has no such term.
+
+The ratio is lower at DR1 for two reasons. The construction-era first year
+also carries 584\,TB beyond its first release (4{,}094\,TB against 3{,}510\,TB).
+The 2026 DR1 window includes the DP2 catalogue. Node counts follow storage,
+because at these points both models assume the same usable data per node.
+
+\smpara{Cost.}
+Lower demand does not mean lower cost. \tabref{tab:opsSummary} put USDF
+hardware at about \$57M over ten years, after deducting three quarters of the
+DRP compute cost for IN2P3 and UKDF. The comparable 2026 figure, the shared-DRP forecast
+(\secref{sec:upbudget}), is \smSplitTenYearHardware{} for hardware. The
+differences are in the prices:
+\begin{itemize}
+\item Compute: about \$102 per core for the ``large Rome'' node used in the
+      construction-era operations tables ($\$13{,}000$ for 128 cores), against
+      \smTorinoUSD{} for a 120-core Torino node, about \$745 per core, before
+      any difference in per-core speed.
+\item Disk: \$70 per TB for normal filesystem disk, against \smCephPerTB{} per
+      TB of usable Ceph.
+\item Qserv: \$20{,}000 per node, against \smKeightsUSD{}.
+\item Tape is the exception, and is cheaper: \$15.65 per TB against
+      \$\smTapePerTB{}.
+\end{itemize}
+The construction-era model also assumed prices would fall every year (10\% for
+CPU, 5\% for storage, 8\% for Qserv), where the 2026 model holds them flat. Its
+own text notes that a 15\% annual storage fall would halve the operations
+estimate. The longer 2026 refresh cycle (\smLifeCompute{} years against three)
+works the other way, lowering cost.
+
+\input{update2026/tables/smCompareVone}
+
+\subsubsection{Superseded figures}
+
+\begin{itemize}
+\item Hosting site: NCSA $\rightarrow$ SLAC S3DF.
+\item Visits per night: 1000 $\rightarrow$ \smVisits{}, over \smNights{}
+      observing nights a year (\tabref{tab:upChanged}).
+\item DR1 DRP compute: design-era estimate $\rightarrow$ \smDRoneNodeDays{}
+      node-days for \smDRoneVisits{} visits, measured on \vthirty{}
+      (\secref{sec:upcompute}).
+\item Compute architecture: Xeon and Rome pricing exemplars $\rightarrow$ the
+      deployed AMD EPYC Milano and Torino batch nodes and EPYC 7543P service
+      nodes.
+\item International split: IN2P3 50\% and UKDF 25\%, flat $\rightarrow$
+      France \smFrShare{}; UK front-loaded, tapering to a \smUkShare{}
+      aggregate (\secref{sec:upsplit}).
+\item Hardware refresh: spread evenly $\rightarrow$ by cohort, with a
+      \smLifeCompute{}-year lifetime (\secref{sec:upbudget}).
+\end{itemize}
+
+Unchanged: Qserv three-fold replication, LDM-141 catalogue counts and row
+sizes, 300 observing nights, and a three-release Qserv window.
+
+\subsubsection{Not updated}
+
+The following remain as in the construction-era sections, as listed in
+\secref{sec:upstatus}:
+\begin{itemize}
+\item the Chilean Base Data Centre and Chilean Data Access Centre (storage,
+      compute and costing);
+\item cloud costs;
+\item a price per TB for the fast (NVMe) tier;
+\item the split between normal disk and object store;
+\item floating-point ratings of machines;
+\item network and WAN, which were never tabulated in this document.
+\end{itemize}

@@ -1,0 +1,84 @@
+\subsection{DRP compute}\label{sec:upcompute}
+
+This replaces the DRP rows of \tabref{tab:drpAndAlertSizing} and
+\tabref{tab:computeSizingOps}.
+
+\subsubsection{Basis}
+
+Compute is anchored on the DR1 estimate in \emph{DRP Resource Usage
+Estimates}, \S1.2.4 (\secref{sec:upmodel}):
+\begin{itemize}
+\item runtimes from the \vthirty{} processing (DM-53697), on Milano
+      nodes;
+\item input: the first year of the \texttt{baseline\_v5.0.0} simulated
+      survey, \smDRoneVisits{} visits;
+\item result: \smDRoneNodeDays{} node-days at \smCoresNode{} cores per node,
+      or \smDRoneCoreHoursM{} million core-hours.
+\end{itemize}
+This supersedes the \wfortyone{} estimate of about 5{,}700 node-days (\S1.2.3).
+The page attributes the increase to four or five tasks, two of which were
+absent from \wfortyone{}. The figure is task-level CPU time. It excludes idle
+time between tasks, gaps between pipeline stages, and calendar stretch.
+
+\subsubsection{From the estimate to each loop year}
+
+The estimate is turned into a rate per terabyte of raw input:
+\[
+  \text{core-hours per input TB} =
+  \frac{\text{estimate core-hours}}
+       {\text{estimate visits} \times \text{image size} \times \text{raw compression}}
+  = \mbox{\smChPerTB} .
+\]
+Numerator and denominator come from the same estimate, so the rate compares
+like with like. One survey year in this model is \smNights{} nights $\times$
+\smVisits{} visits per night, which is \smYrScale{} times the estimate's visit
+list and \smInputTB{}\,TB of input. Each data release reprocesses every
+survey year to date:
+\[
+  \text{core-hours} = \text{input TB per survey year} \times
+  \text{survey years to date} \times \text{core-hours per input TB}.
+\]
+The first column is DP2 as actually run: \smDPtwoNodeDays{} node-days, all on
+Milano nodes (DP2 performance metrics, June 2026).
+
+\smpara{Peak cores.}
+Peak concurrent cores spread each campaign over a \smWindowDays{}-day
+processing window, inflated by an idle and inter-stage multiplier of \smIdle{}.
+The multiplier is \emph{assumed}: the measured ratio of task wall time to task
+CPU time is about 1.14, but time between stages has not been measured, and
+1.3--1.5 has been suggested. A safety margin of \smSafety{} is shown
+separately and is not included in peak demand.
+
+\subsubsection{Fleet}
+
+The USDF batch fleet has \smBatchNodes{} nodes: \smMilano{} Milano and
+\smTorino{} Torino, each with \smCoresNode{} cores. Rubin pipelines run about
+\smSpeedup{} times faster per core on Torino than on Milano, across all tasks.
+Because the estimates are measured on Milano, capacity is expressed in
+Milano-equivalent cores:
+\[
+  (\smMilano{} + \smTorino{} \times \smSpeedup{}) \times \smCoresNode{} = \mbox{\smMilanoEq{}} .
+\]
+The speedup was measured on one generation of tasks and should
+be re-measured at each release.
+
+\subsubsection{Result}
+
+At DR1 the peak is \smDRonePeakCores{} Milano-equivalent cores, or
+\smDRoneUtil{} of today's fleet. Every release reprocesses the whole survey to
+date, so demand rises roughly linearly. With all processing at the USDF, DR9
+needs \smDRnineUtil{} of today's fleet (\tabref{tab:smCompute}). Sharing the
+work with partner facilities changes this materially (\secref{sec:upsplit}).
+
+\smpara{Cross-check against DP2.}
+DP2 used about 32 node-days per thousand visits. The \vthirty{} DR1
+estimate implies about 58, and the superseded \wfortyone{} estimate about 30.
+This is not a contradiction: coadd-stage tasks scale with the number of
+visits per patch, which is far higher in a full survey year than in DP2, so
+the cost per visit should rise. The DRP team should still confirm
+\vthirty{} as the planning basis, because the choice is worth roughly a
+factor of two in DRP compute.
+
+\begin{landscape}
+\input{update2026/tables/smCompute}
+\end{landscape}

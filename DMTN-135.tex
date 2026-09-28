@@ -5,6 +5,7 @@
 % Package imports go here.
 \usepackage{pdflscape}
 \usepackage{afterpage}
+\usepackage{alltt} % command listings in the 2026 update
 
 % Local commands go here.
 
@@ -34,6 +35,9 @@ William O'Mullane, Richard Dubois, Michelle Butler, Kian Tat Lim
 This simplified model is based on real machine architectures we have today.
 We define the needs for construction/commissioning  and  separately the 10 years of  operations.
 This is presented in s series of tables within this document describing the approach taken.
+An operations update (2026), appended at the end, re-derives the operations
+sizing and cost from DP2 and measured DRP resource usage, and states for each
+table which figures it supersedes and which are retained unchanged.
 }
 
 % Change history defined here.
@@ -42,6 +46,7 @@ This is presented in s series of tables within this document describing the appr
 % See LPM-51 for version number policy.
 \setDocChangeRecord{%
   \addtohist{1}{YYYY-MM-DD}{Unreleased.}{William O'Mullane}
+  \addtohist{2.0}{2026-09-25}{Operations update (2026) appended: sizing and cost from DP2 and v30 measurements, generated from lsst/rubin-sizing-model; earlier sections unchanged (DM-49578).}{Aditya Tanikanti}
 }
 
 
@@ -50,9 +55,17 @@ This is presented in s series of tables within this document describing the appr
 % Create the title page.
 \mkshorttitle
 
+\noindent\textbf{Operations update, 2026.}\enspace
+This document was written for construction and last published in April 2023.
+Rubin is now in operations. \secref{sec:update}, at the end of the document,
+records the 2026 operations sizing and cost, and states table by table which of
+the figures below it supersedes and which are retained unchanged.
+
 \input{body}
 
 \input {sizing}
+
+\input{update2026/update}
 \appendix
 % Include all the relevant bib files.
 % https://lsst-texmf.lsst.io/lsstdoc.html#bibliographies

@@ -1,0 +1,62 @@
+% Operations update (2026), appended after the construction-era document.
+% Every figure quoted in the text or tabulated here is generated from the
+% sizing model (update2026/tables/, produced by generate_model.py --emit-tex).
+% Do not type model numbers into these files; add a macro to tex_tables in
+% sizing_params.yaml and regenerate instead.
+\input{update2026/tables/smNumbers}
+
+% Run-in heading. lsstdoc numbers \paragraph (e.g. 1.0.0.1), which reads badly.
+\newcommand{\smpara}[1]{\par\medskip\noindent\textbf{#1}\enspace}
+% Pipeline version names, with break points so long tokens can wrap.
+\newcommand{\vthirty}{v30\_\allowbreak 0\_\allowbreak 0\_\allowbreak rc2}
+\newcommand{\wfortyone}{w\_\allowbreak 2025\_\allowbreak 41}
+
+\section{Operations update (2026)}\label{sec:update}
+
+The sections above were written for construction and describe the operations
+sizing as it was planned then. Rubin is now in operations. The US Data
+Facility (USDF) is hosted at the SLAC Shared Scientific Data Facility (S3DF)
+rather than at NCSA. Data Preview~2 (DP2) has been processed, and the
+resource usage of the Data Release Production (DRP) has been measured on the
+deployed hardware. This section re-derives the operations sizing from those
+measurements.
+
+It amends the document and does not rewrite it. Nothing above has been
+changed. \secref{sec:upstatus} lists every table above with its status:
+
+\begin{itemize}
+\item \emph{updated}: superseded by a table in this section, which is
+      named;
+\item \emph{not updated}: retained as it stands, with the reason given;
+\item \emph{historical}: construction or pre-operations planning, where an
+      update would be meaningless.
+\end{itemize}
+
+\smpara{Scope.}
+The update covers the ten loop years of operations, LOY1--LOY10, which are
+fiscal years FY2026--FY2035 (October to September). LOY1 is DP2; LOY2--LOY10
+are DR1--DR9, one data release per year. Other release cadences are under
+discussion and are not modelled (\secref{sec:upunknowns}). Sizing is given
+first with all processing at the USDF, then with DRP work shared with the
+French (CC-IN2P3) and UK (UKDF) data facilities. The Chilean facilities are not
+updated.
+
+\smpara{How figures are labelled.}
+Figures are \emph{measured} when they come from the deployed system or a
+completed campaign; \emph{estimated} when they come from a projection built on
+measured per-task or per-dataset usage; and \emph{assumed} when nothing has yet
+been measured. Assumptions that materially move the answer are identified in
+the text.
+
+\input{update2026/model}
+\input{update2026/status}
+\input{update2026/preops}
+\input{update2026/budget}
+\input{update2026/inputs}
+\input{update2026/compute}
+\input{update2026/storage}
+\input{update2026/services}
+\input{update2026/qserv}
+\input{update2026/split}
+\input{update2026/reconcile}
+\input{update2026/unknowns}
