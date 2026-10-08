@@ -1,9 +1,9 @@
-\subsection{Storage}\label{sec:upstorage}
+\section{Storage}\label{sec:upstorage}
 
 This replaces \tabref{tab:datasetSizingOps}, and the USDF totals, Qserv and
 tape rows of \tabref{tab:storageFloorOps}.
 
-\subsubsection{Bytes written and on-floor need}
+\subsection{Bytes written and on-floor need}
 
 A data-release campaign writes far more than it keeps. Most of its output is
 intermediate data (warps, templates, pre-detection images and footprints),
@@ -49,7 +49,7 @@ at DR1 and \smDRnineOnFloorPB{}\,PB at DR9, against about
 figure depends on the live-intermediate fraction: live intermediates alone are
 \smDRoneLiveInterPB{}\,PB at DR1.
 
-\subsubsection{Fast tier}
+\subsection{Fast tier}
 
 \tabref{tab:storageFloorOps} kept a separate fast tier for the APDB and the
 Qserv Object table. The 2026 model sizes the same tier from its own APDB and
@@ -61,7 +61,7 @@ premium for low-latency storage, because no current price per TB is available
 for it. The split of the remaining on-floor need between normal
 disk and object store is not updated.
 
-\subsubsection{File counts}
+\subsection{File counts}
 
 The dataset-type table also gives file counts. A DR1-scale campaign writes
 several hundred million files (\tabref{tab:smStorage}), which loads filesystem
@@ -73,7 +73,7 @@ breakdown:
 \end{itemize}
 Neither yet has a DR1-scale size.
 
-\subsubsection{Tape}
+\subsection{Tape}
 
 Tape is cumulative: raw and calibration data and every data release are
 preserved, so the footprint only grows. It reaches \smDRnineTapePB{}\,PB by DR9,

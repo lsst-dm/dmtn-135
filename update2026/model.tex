@@ -1,9 +1,9 @@
-\subsection{How the 2026 figures are produced}\label{sec:upmodel}
+\section{How the 2026 figures are produced}\label{sec:upmodel}
 
-The construction-era tables above were generated from a backing spreadsheet.
-The figures in this section come from a sizing model maintained as code in
+The construction-era tables (\appref{app:construction}) were generated from a
+backing spreadsheet. The 2026 figures come from a sizing model maintained as code in
 \href{https://github.com/lsst/rubin-sizing-model/tree/\smSourceRef}{\texttt{lsst/rubin-sizing-model}}.
-Every table and model figure in this section was generated from version
+Every 2026 table and model figure was generated from version
 \texttt{\smSourceRef} of that repository; none were typed in by hand.
 
 One parameter file, \texttt{sizing\_params.yaml}, holds every input number,
@@ -31,9 +31,9 @@ yellow cell and watch every dependent figure update. A change meant to last is
 made as a pull request against the parameter file, so every revision has a
 recorded author, date and reason.
 
-\subsubsection{Regenerating the tables}\label{sec:upregen}
+\subsection{Regenerating the tables}\label{sec:upregen}
 
-The tables in this section, and the macros that supply the figures quoted in
+The 2026 tables, and the macros that supply the figures quoted in
 the text, are written by the same script. To reproduce them from the version
 cited here:
 \begin{center}
@@ -52,11 +52,11 @@ Each generated file records the tag it came from.
 The model versions cited are listed with their tags in
 \texttt{sizing-models.toml}. \texttt{make sizing-tables} regenerates them, and
 the continuous-integration build does the same before typesetting. It fails if
-this section uses a table or figure that the pinned version does not produce.
-The construction-era tables above still come from the original Google backing
+the text uses a table or figure that the pinned version does not produce.
+The construction-era tables still come from the original Google backing
 sheet (\texttt{make tables}).
 
-\subsubsection{Sources}
+\subsection{Sources}
 
 \begin{itemize}
 \item \href{https://rubinobs.atlassian.net/wiki/spaces/DM/pages/1062404112/DRP+Resource+Usage+Estimates}{\emph{DRP Resource Usage Estimates}}
@@ -94,7 +94,7 @@ Statements attributed to a team (for example ``the Qserv team, September
 2026'') record configuration or intent confirmed in project discussion that
 is not yet written up elsewhere.
 
-\subsubsection{Units}
+\subsection{Units}
 
 Compute is given three ways because each serves a different reader.
 \emph{Core-hours} are what the estimates measure. \emph{Node-days} are how

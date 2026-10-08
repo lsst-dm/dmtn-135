@@ -1,10 +1,10 @@
-\subsection{Qserv catalogue database}\label{sec:upqserv}
+\section{Qserv catalogue database}\label{sec:upqserv}
 
 This replaces the Qserv rows of \tabref{tab:storageSizingOps},
 \tabref{tab:datasetSizingOps}, \tabref{tab:storageFloorOps} and
 \tabref{tab:computeSizingOps}.
 
-\subsubsection{Deployed hardware}
+\subsection{Deployed hardware}
 
 No citable hardware description of the operations Qserv service existed
 before this update. The Qserv team confirmed the following worker node
@@ -33,7 +33,7 @@ The model counts \smQsNodesHave{} Qserv-class nodes in service, from the March
 description of about 90 nodes in two clusters. Most USDF Kubernetes nodes share
 this hardware. Which cluster will serve DR1 is to be confirmed.
 
-\subsubsection{The measured DP2 catalogue}
+\subsection{The measured DP2 catalogue}
 
 The data-preview column is measured, not modelled. On the USDF deployment the
 DP2 catalogue occupies \smQsDPtwoLogicalTB{}\,TB for one copy of each chunk:
@@ -44,7 +44,7 @@ two-fold replication. Production is to run three-fold, so the model
 provisions \smQsDPtwoDiskTB{}\,TB for the preview. That figure is a
 provisioning requirement, not a measurement.
 
-\subsubsection{How data-release catalogues are sized}
+\subsection{How data-release catalogues are sized}
 
 The single-copy logical volume of each data release is computed from
 \citeds{LDM-141} row counts and row sizes, as in \tabref{tab:datasetSizingOps}:
@@ -101,7 +101,7 @@ Partitioning is fixed across a database family, so chunk count grows with sky
 coverage. DP2's 57{,}680 chunks already cover an estimated 11{,}700\,deg$^2$,
 so chunk growth from DP2 to DR1 is modest.
 
-\subsubsection{Calibration}
+\subsection{Calibration}
 
 Two checks sit beside the projection in \tabref{tab:smQserv}:
 
@@ -120,7 +120,7 @@ Two checks sit beside the projection in \tabref{tab:smQserv}:
       the LDM-141 basis.
 \end{itemize}
 
-\subsubsection{Node projection}
+\subsection{Node projection}
 
 Usable data per node is \emph{assumed}:
 \begin{itemize}

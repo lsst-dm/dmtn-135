@@ -1,9 +1,9 @@
-\subsection{DRP compute}\label{sec:upcompute}
+\section{DRP compute}\label{sec:upcompute}
 
 This replaces the DRP rows of \tabref{tab:drpAndAlertSizing} and
 \tabref{tab:computeSizingOps}.
 
-\subsubsection{Basis}
+\subsection{Basis}
 
 Compute is anchored on the DR1 estimate in \emph{DRP Resource Usage
 Estimates}, \S1.2.4 (\secref{sec:upmodel}):
@@ -20,7 +20,7 @@ The page attributes the increase to four or five tasks, two of which were
 absent from \wfortyone{}. The figure is task-level CPU time. It excludes idle
 time between tasks, gaps between pipeline stages, and calendar stretch.
 
-\subsubsection{From the estimate to each loop year}
+\subsection{From the estimate to each loop year}
 
 The estimate is turned into a rate per terabyte of raw input:
 \[
@@ -49,7 +49,7 @@ CPU time is about 1.14, but time between stages has not been measured, and
 1.3--1.5 has been suggested. A safety margin of \smSafety{} is shown
 separately and is not included in peak demand.
 
-\subsubsection{Fleet}
+\subsection{Fleet}
 
 The USDF batch fleet has \smBatchNodes{} nodes: \smMilano{} Milano and
 \smTorino{} Torino, each with \smCoresNode{} cores. Rubin pipelines run about
@@ -62,7 +62,7 @@ Milano-equivalent cores:
 The speedup was measured on one generation of tasks and should
 be re-measured at each release.
 
-\subsubsection{Result}
+\subsection{Result}
 
 At DR1 the peak is \smDRonePeakCores{} Milano-equivalent cores, or
 \smDRoneUtil{} of today's fleet. Every release reprocesses the whole survey to
