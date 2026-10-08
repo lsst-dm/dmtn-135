@@ -54,7 +54,7 @@ Operations-update tables (``update2026/tables/``) come from the tags of
 
 For one model this is equivalent to::
 
-    git clone --branch v2026.09.2 https://github.com/lsst/rubin-sizing-model
+    git clone --branch v2026.10.0 https://github.com/lsst/rubin-sizing-model
     cd rubin-sizing-model
     uv run generate_model.py --emit-tex ../dmtn-135/update2026/tables
 

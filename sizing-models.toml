@@ -9,7 +9,7 @@
 [[model]]
 name = "ops2026"
 repo = "https://github.com/lsst/rubin-sizing-model"
-ref = "v2026.09.2"
+ref = "v2026.10.0"
 params = "sizing_params.yaml"
 output = "update2026/tables"
 macro_prefix = "sm"
