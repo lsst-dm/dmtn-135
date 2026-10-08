@@ -5,19 +5,6 @@
 #
 # Example:
 #   MIA:Missing In Action
-S3DF:SLAC Shared Scientific Data Facility
-HiPS:Hierarchical Progressive Survey
-DP2:Data Preview 2
-EDP2:Early Data Preview 2
-DR:Data Release
-RSP:Rubin Science Platform
-LOY:Loop Year
-FY:Fiscal Year
-WAN:Wide Area Network
-SMT:Simultaneous Multi-Threading
-ZFS:Zettabyte File System
+# Corrections to lsst-texmf etc/glossarydefs.csv (remove once fixed there):
 GbE:Gigabit Ethernet
-K8s:Kubernetes
-HPSS:High Performance Storage System
-RTN:Rubin Technical Note
-UK:United Kingdom
+IN2P3:Institut National de Physique Nucléaire et de Physique des Particules
