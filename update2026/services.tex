@@ -1,14 +1,18 @@
-\section{Alert Production, Science Platform and the APDB}\label{sec:upservices}
+\section{Prompt Processing, Science Platform and the APDB}\label{sec:upservices}
 
 This replaces the Alert Production rows of \tabref{tab:drpAndAlertSizing} and
 the US Data Access Centre and staff rows of \tabref{tab:lspSizing} and
 \tabref{tab:computeSizingOps}. The Chilean Data Access Centre rows are not
 updated. These resources are provided by the USDF alone: partner facilities
-neither run Alert Production nor host the Data Access Centre.
+neither run Prompt Processing nor host the Data Access Centre. All of them
+run on Kubernetes, not on the batch fleet, so none of them appears in the DRP
+compute of \secref{sec:upcompute}.
 
 \begin{itemize}
-\item \emph{Alert Production} runs on Kubernetes. Its core count is an input
-      and is held flat across the survey.
+\item \emph{Prompt Processing}, which includes Alert Production and alert
+      distribution, runs on Kubernetes. Its core count is an input, carried
+      from the construction-era Alert Production figure, and is held flat
+      across the survey. Its disk is in \secref{sec:upstorage}.
 \item \emph{Data Access Centre} compute is 10\% of DRP peak demand, and
       \emph{staff} compute is 10\% of that. These are the same proportions as
       the user compute described in the construction budget, now applied to
@@ -22,7 +26,7 @@ neither run Alert Production nor host the Data Access Centre.
       accumulates to an end-of-survey figure.
 \end{itemize}
 
-The service line in \tabref{tab:smServices} compares Alert Production, Data
+The service line in \tabref{tab:smServices} compares Prompt Processing, Data
 Access Centre and staff cores with the deployed Kubernetes fleet. It is a
 headroom check, not a purchase trigger; Kubernetes growth is costed
 separately (\secref{sec:upbudget}). One inconsistency remains open: planning

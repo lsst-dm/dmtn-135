@@ -23,8 +23,8 @@ priced in neither forecast. Each partner buys its own.
 Both forecasts use the same purchase rules:
 
 \begin{itemize}
-\item \emph{Batch compute}: new Torino nodes when Milano-equivalent peak
-      demand exceeds the fleet, plus cohort refresh.
+\item \emph{Batch compute}, for DRP only: new Torino nodes when
+      Milano-equivalent peak demand exceeds the fleet, plus cohort refresh.
 \item \emph{Disk}: bought to the on-floor need, with re-purchase at the end
       of the storage lifetime.
 \item \emph{Tape}: bought once the cumulative footprint exceeds the capacity
@@ -44,7 +44,8 @@ Only two demands differ:
 Everything else stays at the USDF, and those lines are identical in both
 forecasts:
 \begin{itemize}
-\item Alert Production, the Data Access Centre and the Kubernetes services;
+\item Prompt Processing, the Data Access Centre and the other Kubernetes
+      services;
 \item the USDF's Qserv;
 \item raw data and the retained data-release products, on disk and on tape.
 \end{itemize}

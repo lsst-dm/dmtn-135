@@ -35,8 +35,10 @@ already installed.
 \item \emph{Retained releases}, over a sliding window of \smRetWin{}
       releases.
 \item \emph{Raw and calibration data}, cumulative: raw data is never deleted.
-\item \emph{Prompt products}: Tier-1, kept long term and cumulative, plus a
-      rolling Tier-2 window (RFC-1134).
+\item \emph{Prompt Processing products}: Tier 1, kept long term and
+      cumulative, plus a rolling Tier 2 window (RFC-1134). They share the
+      USDF disk with DRP, so they are sized here; Prompt Processing compute is
+      in \secref{sec:upservices}.
 \item An \emph{other and miscellaneous allowance} of \smOtherFrac{} of the
       subtotal, standing in for user areas, the APDB and simulation output,
       which are not itemised. It is shown as its own line so it can be
