@@ -1,0 +1,50 @@
+% 2026 operations sizing and cost; the construction-era document follows as appendices.
+% Every figure quoted in the text or tabulated here is generated from the
+% sizing model (update2026/tables/, produced by generate_model.py --emit-tex).
+% Do not type model numbers into these files; add a macro to tex_tables in
+% sizing_params.yaml and regenerate instead.
+\input{update2026/tables/smNumbers}
+
+% Run-in heading. lsstdoc numbers \paragraph (e.g. 1.0.0.1), which reads badly.
+\newcommand{\smpara}[1]{\par\medskip\noindent\textbf{#1}\enspace}
+% Pipeline version names, with break points so long tokens can wrap.
+\newcommand{\vthirty}{v30\_\allowbreak 0\_\allowbreak 0\_\allowbreak rc2}
+\newcommand{\wfortyone}{w\_\allowbreak 2025\_\allowbreak 41}
+
+\section{Introduction}\label{sec:update}
+
+This document gives the operations sizing and cost of Rubin data processing as
+of 2026, from Data Preview~2 (DP2) and the measured resource usage of Data
+Release Processing (DRP) at the US Data Facility (USDF), hosted at the SLAC
+Shared Scientific Data Facility (S3DF). The construction-era document is
+retained unchanged in the appendices (\appref{app:construction});
+\secref{sec:upstatus} gives the 2026 status of each of its tables.
+
+\smpara{Scope.}
+USDF sizing and cost are given with all processing at the USDF, and with DRP
+shared with CC-IN2P3 and the UKDF. Prompt Processing runs at the USDF on
+Kubernetes and is sized with the other services (\secref{sec:upservices}). The
+Chilean facilities are not updated.
+
+\smpara{Operations years.}
+Tables run over operations years 1--10, FY2026--FY2035. Year~1 is DP2. In each
+later year~$n$ the model sizes one processing campaign over the $n-1$ survey
+years taken so far, and buys its hardware in that year. It does not schedule
+data releases.
+
+\smpara{Labels.}
+Figures are \emph{measured}, \emph{estimated} from measured per-task or
+per-dataset usage, or \emph{assumed}.
+
+\input{update2026/model}
+\input{update2026/status}
+\input{update2026/preops}
+\input{update2026/budget}
+\input{update2026/inputs}
+\input{update2026/compute}
+\input{update2026/storage}
+\input{update2026/services}
+\input{update2026/qserv}
+\input{update2026/split}
+\input{update2026/reconcile}
+\input{update2026/unknowns}

@@ -1,0 +1,142 @@
+\section{Qserv catalogue database}\label{sec:upqserv}
+
+This replaces the Qserv rows of \tabref{tab:storageSizingOps},
+\tabref{tab:datasetSizingOps}, \tabref{tab:storageFloorOps} and
+\tabref{tab:computeSizingOps}.
+
+\subsection{Deployed hardware}
+
+Worker nodes, as confirmed by the Qserv team in July 2026:
+
+\begin{itemize}
+\item CPU: one AMD EPYC 7543P (32 cores, 64 hardware threads, SMT enabled).
+\item RAM: 256\,GB.
+\item Storage: node-local NVMe, shared-nothing, with no network storage in
+      the query path. 12 of 24 slots are populated, giving 32\,TB raw per
+      node. ZFS compression gives about a factor of two, so about 64\,TB is
+      usable per node. Populating the remaining slots would double raw
+      capacity.
+\item Internal network: 100\,GbE.
+\item Replication: three-fold on production.
+\end{itemize}
+
+As of July 2026 the named deployments were:
+\begin{itemize}
+\item a 35-node Kubernetes production cluster, serving DP2;
+\item a 35-node Kubernetes integration cluster;
+\item a 6-node Docker integration cluster.
+\end{itemize}
+The model counts \smQsNodesHave{} Qserv-class nodes in service, from the March
+2026 inventory. That is consistent with the Qserv team's September 2026
+description of about 90 nodes in two clusters. Most USDF Kubernetes nodes share
+this hardware. Which cluster will serve DR1 is to be confirmed.
+
+\subsection{The measured DP2 catalogue}
+
+The data-preview column is measured, not modelled. On the USDF deployment the
+DP2 catalogue occupies \smQsDPtwoLogicalTB{}\,TB for one copy of each chunk:
+27.0\,TB of chunk tables plus 6.4\,TB of overlap tables, of which
+\smQsDPtwoIndexTB{}\,TB are indexes. With every replica it is 66.9\,TB on disk,
+exactly twice the single-copy figure. The deployment measured therefore runs
+two-fold replication. Production is to run three-fold, so the model
+provisions \smQsDPtwoDiskTB{}\,TB for the preview. That figure is a
+provisioning requirement, not a measurement.
+
+\subsection{How data-release catalogues are sized}
+
+The single-copy logical volume of each data release is computed from
+\citeds{LDM-141} row counts and row sizes, as in \tabref{tab:datasetSizingOps}:
+\[
+  V_{\mathrm{logical}} =
+  \bigl(N_{\mathrm{obj}}\,(r_{\mathrm{obj}} + r_{\mathrm{obj,extra}})
+        + N_{\mathrm{src}}\,r_{\mathrm{src}}\bigr)\,g^{k}
+  + N_{\mathrm{fs}}\,r_{\mathrm{fs}} ,
+\]
+where $g$ is one plus the row-size growth per release and $k$ counts releases
+since DR1. The volume on disk is
+\[
+  V_{\mathrm{disk}} = V_{\mathrm{logical}} \times (1 + o) \times R ,
+\]
+with overlap uplift $o = \smQsOverlap$ and replication $R = \smQsRep$.
+
+\smpara{Compression is applied once, on the capacity side.}
+ZFS compression is already in the usable capacity per node:
+$32\,\mathrm{TB} \times 2 \times 0.675$ usable $= 43.2$\,TB. The catalogue
+volume is therefore carried uncompressed.
+
+\smpara{Row sizes grow between releases.}
+As in \tabref{tab:storageSizingOps}, row sizes widen as measured columns are
+added. The construction-era values imply 3.02\%, 3.00\% and 3.12\% per step for
+Object, Object\_Extra and Source. The model uses \smRowGrowth{} per release,
+reaching a factor of \smQsDRnineInfl{} by DR9. Forced sources are held flat,
+because that schema is fixed.
+
+\smpara{Forced sources include those on DIAObjects.}
+The LDM-141 forced-source count covers forced photometry on both Objects and
+DIAObjects, which DP2 holds in two tables (ForcedSource and
+ForcedSourceOnDIAObject), so the second table is not added separately. This
+assumes both have roughly the 41-byte row size.
+
+\smpara{Overlap.}
+The uplift of \smQsOverlap{} is measured on DP2: overlap bytes over chunk bytes,
+for the whole catalogue. The partitioning uses 340 stripes of 3 sub-stripes,
+giving sub-chunks $180^\circ / 340 / 3 = 10.59$ arcmin high. That is identical
+to the UK Data Facility's configuration. With a 1-arcmin overlap, the
+geometric overlap is about 41\% by area.
+
+The measured aggregate is lower because only director tables carry overlap;
+child tables such as ForcedSource carry none. As forced sources accumulate,
+the director share of the catalogue falls from about half at DR1 to about a
+sixth at DR9. A flat aggregate uplift therefore overstates later releases, by
+up to about 13\% at DR9.
+
+\smpara{Chunk count follows sky area, not data volume.}
+Partitioning is fixed across a database family, so chunk count grows with sky
+coverage. DP2's 57{,}680 chunks already cover an estimated 11{,}700\,deg$^2$,
+so chunk growth from DP2 to DR1 is modest.
+
+\subsection{Calibration}
+
+Two checks sit beside the projection in \tabref{tab:smQserv}:
+
+\begin{itemize}
+\item An independent planning estimate puts DR1 at
+      \smQsPlanLowPB--\smQsPlanHighPB\,PB for one copy. The model gives
+      \smQsDRonePerCopyPB\,PB, or \smQsDRoneVsPlan{} of that range's midpoint.
+      The estimate's source has not been traced, and the gap is recorded
+      rather than adjusted away.
+\item The modelled DR1 catalogue is more than forty times the measured DP2
+      catalogue, for about seven times DP2's visits. Some of that is
+      expected, because DR1 covers more sky and forced photometry grows with
+      depth. The rest suggests a mismatch between LDM-141 row sizes and the
+      schema actually deployed. Per-table row counts for DP2 are needed to
+      settle it. Until then, read the data-release columns as an upper bound on
+      the LDM-141 basis.
+\end{itemize}
+
+\subsection{Node projection}
+
+Usable data per node is \emph{assumed}:
+\begin{itemize}
+\item 43.2\,TB in years 1 and 2;
+\item 86.4\,TB from year 3, with all 24 NVMe slots populated;
+\item 172.8\,TB from year 7, with denser drives.
+\end{itemize}
+Qserv holds a sliding window of three releases: two served, one in
+preparation, as in the construction-era model.
+
+On these assumptions year 2, when the first data release is loaded, needs
+\smQsDRoneNodes{} nodes against \smQsNodesHave{} in service, a gap of
+\smQsDRoneGap{}. That gap depends entirely on when the empty slots are filled.
+If they are populated before the first release is loaded, the same
+\smQsDRoneWindowTB{}\,TB needs about half as many nodes. By year 10 the
+projection reaches \smQsDRnineNodes{} nodes. The fall in node count in year 7
+comes from the drive-density step, not from falling demand.
+\textbf{Populating the empty NVMe slots before the first data release is loaded
+is the most effective Qserv action available.}
+
+\input{update2026/tables/smQservInputs}
+
+\begin{landscape}
+\input{update2026/tables/smQserv}
+\end{landscape}

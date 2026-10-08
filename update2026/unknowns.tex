@@ -1,0 +1,46 @@
+\section{Known unknowns}\label{sec:upunknowns}
+
+The items below are listed in order of how much they could move the answer.
+Each is an \emph{assumption} or an unresolved discrepancy, not a measurement.
+
+\begin{enumerate}
+\item \textbf{Live-intermediate fraction} (\smLiveFrac). It dominates on-floor
+      storage and has not been measured.
+\item \textbf{DR1 compute basis}: \vthirty{} (\smDRoneNodeDays{} node-days)
+      against the earlier \wfortyone{} estimate (about 5{,}700). DP2's measured
+      cost per visit is closer to the earlier figure (\secref{sec:upcompute}).
+      The difference is worth about a factor of two in DRP compute.
+\item \textbf{Idle and inter-stage multiplier} (\smIdle). Only the task-level
+      ratio of wall time to CPU time (about 1.14) has been measured.
+\item \textbf{Release cadence}. The model runs one campaign a year. A release
+      every two or three years would mean fewer campaigns, each covering all
+      data to date. Release retention on disk, in Qserv and on tape is set by
+      parameters; which years have a campaign is not yet a parameter.
+\item \textbf{Qserv catalogue basis}. The modelled DR1 catalogue is more than
+      forty times the measured DP2 catalogue, for about seven times the visits.
+      Per-table row counts for DP2 would settle this. They would also show:
+      \begin{itemize}
+      \item which tables carry overlap (worth up to about 13\% at DR9);
+      \item whether ForcedSource and ForcedSourceOnDIAObject share the 41-byte
+            row size;
+      \item where the independent DR1 estimate of
+            \smQsPlanLowPB--\smQsPlanHighPB\,PB comes from.
+      \end{itemize}
+\item \textbf{Which Qserv deployment was measured}, and whether the integration
+      cluster is representative of production. The measured catalogue used
+      two-fold replication; production is to use three-fold.
+\item \textbf{When the empty NVMe slots are populated}. This decides whether
+      Qserv has a node gap at DR1 (\secref{sec:upqserv}).
+\item \textbf{Partner shares and capacity}: UKDF's year-by-year profile;
+      France's share and capacity; and a review of partner provisioning
+      against the current compute basis (\secref{sec:upsplit}).
+\item \textbf{Torino speedup} (\smSpeedup). Measured on one generation of
+      tasks.
+\item \textbf{Tape}: how much shared tape capacity is actually available to
+      Rubin, and how much archive is already on the floor.
+\item \textbf{Kubernetes allocatable cores}: 48 in planning documents against
+      64 hardware threads deployed (DM-54218).
+\item \textbf{DR1-scale sizes} for Scarlet models and HiPS maps.
+\item \textbf{Hosting and overhead rates}, which were not re-quoted, and a
+      price for the fast (NVMe) tier.
+\end{enumerate}

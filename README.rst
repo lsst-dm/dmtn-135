@@ -36,6 +36,33 @@ Clean built files::
 
     make clean
 
+Tables
+------
+
+CI regenerates both sets of tables before building the PDF.
+
+Construction-era tables come from the original Google backing sheet::
+
+    make tables
+
+Operations-update tables (``update2026/tables/``) come from the tags of
+`lsst/rubin-sizing-model <https://github.com/lsst/rubin-sizing-model>`_ listed in
+``sizing-models.toml``. Needs ``git`` and `uv <https://docs.astral.sh/uv/>`_::
+
+    make sizing-tables          # regenerate from the pinned tags
+    make sizing-tables-check    # fail if the committed tables are stale
+
+For one model this is equivalent to::
+
+    git clone --branch v2026.10.0 https://github.com/lsst/rubin-sizing-model
+    cd rubin-sizing-model
+    uv run generate_model.py --emit-tex ../dmtn-135/update2026/tables
+
+To cite a new model version, tag the sizing-model repository, update ``ref`` in
+``sizing-models.toml``, run ``make sizing-tables`` and commit the tables with it.
+To add a scenario, add a ``[[model]]`` entry with its own parameter file, output
+directory and macro prefix.
+
 Updating acronyms
 -----------------
 

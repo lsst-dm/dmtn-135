@@ -1,0 +1,39 @@
+\section{Prompt Processing, Science Platform and the APDB}\label{sec:upservices}
+
+This replaces the Alert Production rows of \tabref{tab:drpAndAlertSizing} and
+the US Data Access Centre and staff rows of \tabref{tab:lspSizing} and
+\tabref{tab:computeSizingOps}. The Chilean Data Access Centre rows are not
+updated. These resources are provided by the USDF alone: partner facilities
+neither run Prompt Processing nor host the Data Access Centre. All of them
+run on Kubernetes, not on the batch fleet, so none of them appears in the DRP
+compute of \secref{sec:upcompute}.
+
+\begin{itemize}
+\item \emph{Prompt Processing}, which includes Alert Production and alert
+      distribution, runs on Kubernetes. Its core count is an input held flat
+      across the survey; its disk is in \secref{sec:upstorage}.
+\item \emph{Data Access Centre} compute is 10\% of DRP peak demand, and
+      \emph{staff} compute is 10\% of that. These are the same proportions as
+      the user compute described in the construction budget, now applied to
+      the measured DRP basis. As before, the Rubin Science Platform's compute
+      is part of this allowance, not additional to it.
+\item \emph{Interactive} nodes are counted as deployed.
+\item The \emph{APDB} grows with cumulative visits, scaled from a reference
+      size at a reference visit count. Its on-floor volume is inside the other
+      and miscellaneous storage allowance (\secref{sec:upstorage}), not added
+      to it. The APDB is also part of the fast tier. Its off-site backup
+      accumulates to an end-of-survey figure.
+\end{itemize}
+
+The service line in \tabref{tab:smServices} compares Prompt Processing, Data
+Access Centre and staff cores with the deployed Kubernetes fleet. It is a
+headroom check, not a purchase trigger; Kubernetes growth is costed
+separately (\secref{sec:upbudget}). One inconsistency remains open: planning
+documents give 48 allocatable cores per Kubernetes node, but the deployed
+nodes have 64 hardware threads (DM-54218).
+
+\input{update2026/tables/smServiceInputs}
+
+\begin{landscape}
+\input{update2026/tables/smServices}
+\end{landscape}

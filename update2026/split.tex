@@ -1,0 +1,39 @@
+\section{International processing split}\label{sec:upsplit}
+
+The construction-era operations tables assume IN2P3 50\% and UKDF 25\% of DRP
+processing, flat across the survey. The current working shares are
+\emph{provisional}:
+
+\begin{itemize}
+\item \emph{France (CC-IN2P3)}: \smFrShare{} throughout. The facility's own
+      capacity plan has not yet been received.
+\item \emph{UK (UKDF)}: \smUkShare{} as a work-weighted ten-year aggregate.
+      UKDF bought early to cover about 40\% of the first years' requirement,
+      and will commit less later so the aggregate is met. The model's
+      year-by-year profile meets the aggregate, but it is a placeholder until
+      UKDF supplies its own. UKDF's provisioned capacity is \smUkCapM{} million
+      core-hours a year.
+\item \emph{USDF} carries the residual share of DRP, plus all Prompt
+      Processing, Data Access Centre, Qserv and Kubernetes services.
+\end{itemize}
+
+\smpara{Capacity against the current compute basis.}
+On the \vthirty{} basis (\secref{sec:upcompute}), UK demand is
+\smUkReqDRfour{} of UKDF's provisioned capacity in year 5, \smUkReqDRfive{} in
+year 6 and \smUkReqDRnine{} by year 10. The USDF share reaches
+\smUsdfSplitDRfive{} of its current fleet in year 6, \smUsdfSplitDRsix{} in year 7
+and \smUsdfSplitDRnine{} by year 10
+(\tabref{tab:smSplit}). On the superseded \wfortyone{} basis, the UK profile
+stayed within its provisioned capacity through year 10. Partner provisioning
+should be reviewed against the current estimate.
+
+\smpara{Storage.}
+Splitting processing moves live intermediates to the facility doing the work.
+Retained releases continue to be archived at the USDF, so the split does not
+change the USDF archive.
+
+\input{update2026/tables/smSplitInputs}
+
+\begin{landscape}
+\input{update2026/tables/smSplit}
+\end{landscape}

@@ -5,6 +5,7 @@
 % Package imports go here.
 \usepackage{pdflscape}
 \usepackage{afterpage}
+\usepackage{alltt} % command listings in the 2026 update
 
 % Local commands go here.
 
@@ -19,7 +20,7 @@ DM sizing model and cost  plan for construction and operations.}
 % \setDocSubtitle{A subtitle}
 
 \author{%
-William O'Mullane, Richard Dubois, Michelle Butler, Kian Tat Lim
+William O'Mullane, Richard Dubois, Michelle Butler, Kian Tat Lim, Aditya Tanikanti
 }
 
 \setDocRef{DMTN-135}
@@ -31,9 +32,12 @@ William O'Mullane, Richard Dubois, Michelle Butler, Kian Tat Lim
 % \setDocCurator{The Curator of this Document}
 
 \setDocAbstract{%
-This simplified model is based on real machine architectures we have today.
-We define the needs for construction/commissioning  and  separately the 10 years of  operations.
-This is presented in s series of tables within this document describing the approach taken.
+This document gives the 2026 sizing and cost of Rubin data processing in
+operations, derived from Data Preview 2 and measured Data Release Processing
+resource usage on the deployed hardware. The construction-era sizing model and
+cost plan (last published in 2023) is retained unchanged in the appendices as a
+historical record, with a table-by-table account of which of its figures are
+superseded.
 }
 
 % Change history defined here.
@@ -42,6 +46,7 @@ This is presented in s series of tables within this document describing the appr
 % See LPM-51 for version number policy.
 \setDocChangeRecord{%
   \addtohist{1}{YYYY-MM-DD}{Unreleased.}{William O'Mullane}
+  \addtohist{3.0}{2026-10-08}{2026 operations sizing and cost, from DP2 and v30 measurements and generated from lsst/rubin-sizing-model, now leads the document; the construction-era content moves unchanged to the appendices (DM-49578).}{Aditya Tanikanti}
 }
 
 
@@ -50,10 +55,21 @@ This is presented in s series of tables within this document describing the appr
 % Create the title page.
 \mkshorttitle
 
+\input{update2026/update}
+
+\appendix
+\section{Construction-era document (2023)}\label{app:construction}
+
+The appendices that follow this one are the construction-era version of this
+document, as last published in April 2023. They are reproduced unchanged as a
+historical record, including their own introduction and their references to
+the US Data Facility at NCSA.
+Their tables are listed with their 2026 status in \secref{sec:upstatus}.
+
 \input{body}
 
 \input {sizing}
-\appendix
+
 % Include all the relevant bib files.
 % https://lsst-texmf.lsst.io/lsstdoc.html#bibliographies
 \section{References} \label{sec:bib}

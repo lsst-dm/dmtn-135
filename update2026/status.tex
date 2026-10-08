@@ -1,0 +1,64 @@
+\section{Status of the construction-era tables}\label{sec:upstatus}
+
+\tabref{tab:upStatus} lists every table in the construction-era appendices.
+\emph{Updated} tables are superseded by the 2026 table named; \emph{not
+updated} tables stand as they are; \emph{historical} tables cover construction
+or pre-operations planning.
+
+\small
+\begin{longtable}{|p{0.30\textwidth}|p{0.14\textwidth}|p{0.46\textwidth}|}
+\caption{Status of each construction-era table in this 2026 update.
+\label{tab:upStatus}}\\
+\hline
+\textbf{Table} & \textbf{Status} & \textbf{2026 treatment} \\
+\hline\endfirsthead
+\hline
+\textbf{Table} & \textbf{Status} & \textbf{2026 treatment} \\
+\hline\endhead
+\multicolumn{3}{|l|}{\textbf{Construction budget} (\secref{sec:cost})} \\ \hline
+\tabref{tab:Summary} & historical & Construction is complete. \\ \hline
+\multicolumn{3}{|l|}{\textbf{Pre-operations} (\secref{sec:preopscost})} \\ \hline
+\tabref{tab:preOps}, \tabref{tab:preCompute}, \tabref{tab:preStorage} & historical &
+  The plan is kept; what was actually purchased is in \tabref{tab:smPreops}. \\ \hline
+\multicolumn{3}{|l|}{\textbf{Operations budget} (\secref{sec:opscost})} \\ \hline
+\tabref{tab:opsSummary} & updated (USDF) & USDF half replaced by \tabref{tab:smCost} (all at the USDF) and \tabref{tab:smCostSplit} (shared DRP); Chile half not updated. \\ \hline
+\tabref{tab:cloud} & not updated & No current cloud-cost data. \\ \hline
+\tabref{tab:opsSumUSDF} & updated & \tabref{tab:smCostSplit}, which like this table removes the partners' share of DRP compute; \tabref{tab:smCost} is the all-at-USDF upper bound. \\ \hline
+\tabref{tab:opsChileR} & not updated & The Chilean facilities are outside this update. \\ \hline
+\multicolumn{3}{|l|}{\textbf{Cost details} (construction)} \\ \hline
+\tabref{tab:Xeon}, \tabref{tab:Rome}, \tabref{tab:StorageCost}, \tabref{tab:overheadCost} & historical & Construction-era costing. \\ \hline
+\multicolumn{3}{|l|}{\textbf{Cost details} (operations, \secref{sec:opsdetails})} \\ \hline
+\tabref{tab:opsXeon}, \tabref{tab:opsXeonUSDF}, \tabref{tab:opsRomeUSDF} & updated &
+  Xeon and Rome exemplars replaced by the deployed Milano and Torino nodes and
+  2026 unit costs (\tabref{tab:smCostInputs}). \\ \hline
+\tabref{tab:opsStorageCost}, \tabref{tab:opsStorageUSDF} & updated & Disk and tape lines of \tabref{tab:smCost}. \\ \hline
+\tabref{tab:opsOverheadCost} & updated & Hosting per node-year and overhead, both carried forward rather than re-quoted (\tabref{tab:smCostInputs}). \\ \hline
+\tabref{tab:opsInputs} & updated & Annual price change and hardware lifetimes (\tabref{tab:smCostInputs}). \\ \hline
+\tabref{tab:opsXeonChile}, \tabref{tab:opsRomeChile}, \tabref{tab:opsStorageChile}, \tabref{tab:opsOverheadChile}, \tabref{tab:rackCostChile}, \tabref{tab:powerCostChile}, \tabref{tab:opsSumChile} & not updated & The Chilean facilities are outside this update. \\ \hline
+\multicolumn{3}{|l|}{\textbf{Models} (\secref{sec:model})} \\ \hline
+\tabref{tab:Inputs} & updated & \tabref{tab:smComputeInputs}, \tabref{tab:smStorageInputs}. \\ \hline
+\tabref{tab:Storage} & partly updated &
+  Disk (Ceph) and tape prices updated (\tabref{tab:smCostInputs}). The fast
+  (NVMe) tier is sized (\secref{sec:upstorage}) but \textbf{not separately
+  costed}: no current price per TB is available. \\ \hline
+\tabref{tab:Machines} & partly updated & Deployed node types and costs; floating-point (FLOPs) ratings are not updated. \\ \hline
+\tabref{tab:overheads} & updated & Replaced by hosting per node-year. \\ \hline
+\multicolumn{3}{|l|}{\textbf{Sizing inputs}: construction (\secref{sec:sizeinputs})} \\ \hline
+\tabref{tab:storageSizing}, \tabref{tab:datasetSizing}, \tabref{tab:storageFloor} & historical & Construction-era storage model. \\ \hline
+\tabref{tab:chileStorage} & not updated & The Chilean facilities are outside this update. \\ \hline
+\tabref{tab:computeSizing}, \tabref{tab:drpAndAlertSizing} & updated & Measured basis (\secref{sec:upcompute}, \secref{sec:upservices}). \\ \hline
+\tabref{tab:lspSizing} & updated (US, staff) & \tabref{tab:smServices}; Chilean Data Access Centre not updated. \\ \hline
+\tabref{tab:desComparison} & historical & A construction-era sanity check. \\ \hline
+\multicolumn{3}{|l|}{\textbf{Sizing inputs}: operations} \\ \hline
+\tabref{tab:storageSizingOps} & updated & \tabref{tab:smComputeInputs}, \tabref{tab:smStorageInputs}, \tabref{tab:smQservInputs}; changed assumptions in \secref{sec:upinputs}. \\ \hline
+\tabref{tab:datasetSizingOps} & updated & DR1 dataset-type breakdown (\secref{sec:upstorage}); the Qserv formula is reproduced (\secref{sec:upreconcile}). \\ \hline
+\tabref{tab:storageFloorOps} & updated (partly) &
+  Total, Qserv, fast tier and tape updated (\tabref{tab:smStorage},
+  \tabref{tab:smQserv}, \tabref{tab:smTape}). The split between normal disk
+  and object store is not available and is not updated. \\ \hline
+\tabref{tab:chileStorageOps} & not updated & The Chilean facilities are outside this update. \\ \hline
+\tabref{tab:computeSizingOps} & updated (US) & \tabref{tab:smCompute}, \tabref{tab:smServices}, \tabref{tab:smQserv}; Chilean Data Access Centre rows not updated. \\ \hline
+\end{longtable}
+\normalsize
+
+Network and WAN were never tabulated in this document and remain unmodelled.

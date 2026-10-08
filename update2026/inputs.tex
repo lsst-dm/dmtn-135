@@ -1,0 +1,36 @@
+\section{Sizing inputs}\label{sec:upinputs}
+
+\tabref{tab:upChanged} sets the 2026 inputs beside the operations inputs of
+\tabref{tab:storageSizingOps} and \tabref{tab:datasetSizingOps}.
+
+\small
+\begin{longtable}{|p{0.26\textwidth}|p{0.25\textwidth}|p{0.39\textwidth}|}
+\caption{Operations sizing inputs: construction-era values against 2026.
+\label{tab:upChanged}}\\
+\hline
+\textbf{Input} & \textbf{Construction era} & \textbf{2026} \\
+\hline\endfirsthead
+\hline
+\textbf{Input} & \textbf{Construction era} & \textbf{2026} \\
+\hline\endhead
+Observing nights per year & 300 & \smNights{} (unchanged) \\ \hline
+Visits per night & 1000 & \smVisits{} (Rubin Key Numbers) \\ \hline
+Raw data per visit & 2 images of 15.2\,GB & One raw image of 8.19\,GB (logical) per visit \\ \hline
+Raw compression & 0.42 & 0.464 \\ \hline
+Calibration and engineering frames & 500 calibration images a day; engineering 1\% of science & One combined raw, calibration and engineering figure per survey year (\tabref{tab:smStorageInputs}) \\ \hline
+Output sizes & Per-product constants; lossy compression 0.25 & DR1 dataset-type breakdown, measured with compression (\secref{sec:upstorage}) \\ \hline
+Scratch & 10\% of output images & Live intermediates at \smLiveFrac{} of campaign intermediates (assumed) \\ \hline
+Science users and their storage & 5000 users at 0.4\,TB, rising & Within the \smOtherFrac{} other and miscellaneous allowance \\ \hline
+Simulation output & 5\,TB a year & Within the same allowance \\ \hline
+Catalogue row sizes & LDM-141, growing about 3\% a year & LDM-141, growing \smRowGrowth{} per release; forced sources flat \\ \hline
+Qserv replication & 3 & \smQsRep{} (unchanged) \\ \hline
+Object, source and forced-source counts & LDM-141 & LDM-141 (unchanged) \\ \hline
+DRP compute & Design-era estimate & Measured basis, \vthirty{} (\secref{sec:upcompute}) \\ \hline
+\end{longtable}
+\normalsize
+
+The 2026 inputs themselves are in \tabref{tab:smComputeInputs} and
+\tabref{tab:smStorageInputs}.
+
+\input{update2026/tables/smComputeInputs}
+\input{update2026/tables/smStorageInputs}

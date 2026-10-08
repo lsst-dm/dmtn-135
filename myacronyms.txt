@@ -5,3 +5,6 @@
 #
 # Example:
 #   MIA:Missing In Action
+# Corrections to lsst-texmf etc/glossarydefs.csv (remove once fixed there):
+GbE:Gigabit Ethernet
+IN2P3:Institut National de Physique Nucléaire et de Physique des Particules

@@ -1,0 +1,121 @@
+\section{Operations budget and cost details}\label{sec:upbudget}
+
+This replaces the USDF half of the operations budget (\tabref{tab:opsSummary},
+\tabref{tab:opsSumUSDF}) and the USDF cost details of \secref{sec:opsdetails}.
+The Chilean budget and cost details, and the cloud costs (\tabref{tab:cloud}),
+are not updated.
+
+Two forecasts are given, both priced with USDF hardware quotes:
+\begin{itemize}
+\item \emph{All at the USDF} (\tabref{tab:smCost}): every workload is hosted
+      and bought at the USDF. It is an upper bound for the USDF.
+\item \emph{Shared DRP} (\tabref{tab:smCostSplit}): the USDF's own purchases
+      when DRP processing is shared with France and the UK at the shares in
+      \secref{sec:upsplit}. It is the realistic USDF budget, and the one to
+      compare with \tabref{tab:opsSumUSDF}, which likewise deducted the
+      partners' share of DRP compute.
+\end{itemize}
+No price quotes are held for the partner facilities, so their hardware is
+priced in neither forecast. Each partner buys its own.
+
+\subsection{Method}
+
+Both forecasts use the same purchase rules:
+
+\begin{itemize}
+\item \emph{Batch compute}, for DRP only: new Torino nodes when
+      Milano-equivalent peak demand exceeds the fleet, plus cohort refresh.
+\item \emph{Disk}: bought to the on-floor need, with re-purchase at the end
+      of the storage lifetime.
+\item \emph{Tape}: bought once the cumulative footprint exceeds the capacity
+      assumed available.
+\item \emph{Kubernetes}: a fixed annual growth rate, plus cohort refresh.
+\item \emph{Qserv}: bought to the running maximum of the node projection,
+      plus cohort refresh.
+\end{itemize}
+
+\smpara{What the shared-DRP forecast changes.}
+Only two demands differ:
+\begin{itemize}
+\item Batch compute follows the USDF's share of peak cores.
+\item On-floor disk excludes the live intermediates held at the partner
+      facilities during their share of each campaign.
+\end{itemize}
+Everything else stays at the USDF, and those lines are identical in both
+forecasts:
+\begin{itemize}
+\item Prompt Processing, the Data Access Centre and the other Kubernetes
+      services;
+\item the USDF's Qserv;
+\item raw data and the retained data-release products, on disk and on tape.
+\end{itemize}
+Partner Qserv deployments are partner costs. The other and miscellaneous disk
+allowance is not reduced, because what it stands in for stays at the USDF.
+
+\smpara{Refresh by cohort.}
+Hardware bought in fiscal year $x$ is replaced in year $x$ plus its lifetime,
+starting from the purchases in \tabref{tab:smPreops}. The lifetime is
+\smLifeCompute{} years for compute and \smLifeStorage{} for storage.
+
+\smpara{FY2026 uses actual requests.}
+The first column of both forecasts uses the FY2026 requests recorded in the
+2026 capacity capture, not modelled figures.
+
+\smpara{Unit costs} come from the 2026 capacity capture (August 2026
+revision), and replace the Xeon and Rome exemplars of
+\tabref{tab:opsXeonUSDF} and \tabref{tab:opsRomeUSDF}:
+\begin{itemize}
+\item Torino batch node with 768\,GB: \smTorinoUSD{}.
+\item Kubernetes or Qserv-class node: \smKeightsUSD{}.
+\item Usable Ceph disk: \smCephPerTB{} per TB.
+\item Tape: \$\smTapePerTB{} per TB.
+\end{itemize}
+Prices are held flat.
+
+There is no current price for the fast (NVMe) tier of \tabref{tab:Storage}, so
+that tier is sized in \secref{sec:upstorage} but not separately costed. Hosting
+and overhead rates were not re-quoted for 2026 and are the least well-founded
+cost inputs.
+
+\subsection{Result}
+
+\begin{center}
+\begin{tabular}{lrr}
+\hline
+Ten-year total & All at the USDF & Shared DRP (USDF only) \\
+\hline
+Batch compute & \smTenYearBatch{} & \smSplitTenYearBatch{} \\
+Disk & \smTenYearDisk{} & \smSplitTenYearDisk{} \\
+Tape & \smTenYearTape{} & \smTenYearTape{} \\
+Kubernetes & \smTenYearKeights{} & \smTenYearKeights{} \\
+Qserv & \smTenYearQserv{} & \smTenYearQserv{} \\
+\hline
+Hardware & \smTenYearHardware{} & \smSplitTenYearHardware{} \\
+Total, with hosting and overhead & \smTenYearTotal{} & \smSplitTenYearTotal{} \\
+\hline
+\end{tabular}
+\end{center}
+
+Tape, Kubernetes and Qserv are the same in both forecasts, because they stay
+at the USDF. The choice of DRP compute estimate is the largest single
+sensitivity. With all processing at the USDF, moving from the superseded
+\wfortyone{} estimate to \vthirty{} (\secref{sec:upcompute}) adds roughly
+\$29M over ten years.
+
+The forecast is expected to trigger the project risk on a computing cost
+mismatch (Rubin-DP-T-9). The responses available include:
+\begin{itemize}
+\item accepting longer processing;
+\item further efficiency in algorithms, storage, compression or retention;
+\item additional batch allocations.
+\end{itemize}
+Network and WAN, Chilean hardware and staffing are not included. Why the 2026
+forecast costs more than the construction-era one, although demand is mostly
+lower, is explained in \secref{sec:upwhy}.
+
+\input{update2026/tables/smCostInputs}
+
+\begin{landscape}
+\input{update2026/tables/smCost}
+\input{update2026/tables/smCostSplit}
+\end{landscape}
