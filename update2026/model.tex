@@ -8,7 +8,7 @@ Every 2026 table and model figure was generated from version
 
 One parameter file, \texttt{sizing\_params.yaml}, holds every input number,
 label and note. A script, \texttt{generate\_model.py}, turns it into an Excel
-workbook of live formulas:
+workbook of live formulas,
 \begin{center}
 \small\href{https://github.com/lsst/rubin-sizing-model/blob/\smSourceRef/rubin_usdf_model_2026_condensed_with_pricing.xlsx}{\texttt{rubin\_usdf\_model\_2026\_condensed\_with\_pricing.xlsx}}
 \end{center}
@@ -23,13 +23,7 @@ derive everything else from them:
 \item two USDF cost forecasts, one with all processing at the USDF and one
       with DRP shared.
 \end{itemize}
-No figure appears in two places.
-
-In the workbook, blue cells are inputs, black cells are formulas, and yellow
-marks an assumption that materially moves the answer. A reader can change a
-yellow cell and watch every dependent figure update. A change meant to last is
-made as a pull request against the parameter file, so every revision has a
-recorded author, date and reason.
+Yellow cells mark the assumptions that most move the answer.
 
 \subsection{Regenerating the tables}\label{sec:upregen}
 
@@ -47,22 +41,18 @@ uv run generate_model.py --emit-tex ../dmtn-135/update2026/tables
 \end{minipage}
 \end{center}
 This needs \texttt{git} and \href{https://docs.astral.sh/uv/}{\texttt{uv}}.
-Each generated file records the tag it came from.
 
 The model versions cited are listed with their tags in
-\texttt{sizing-models.toml}. \texttt{make sizing-tables} regenerates them, and
-the continuous-integration build does the same before typesetting. It fails if
-the text uses a table or figure that the pinned version does not produce.
-The construction-era tables still come from the original Google backing
-sheet (\texttt{make tables}).
+\texttt{sizing-models.toml}; \texttt{make sizing-tables} regenerates them, as
+the CI build does. The construction-era tables still come from the Google
+backing sheet (\texttt{make tables}).
 
 \subsection{Sources}
 
 \begin{itemize}
 \item \href{https://rubinobs.atlassian.net/wiki/spaces/DM/pages/1062404112/DRP+Resource+Usage+Estimates}{\emph{DRP Resource Usage Estimates}}
-      (Confluence, Data Management space, last modified 2026-03-23). This is
-      the \textbf{source of truth for DRP compute and storage}. Where it gives
-      estimates for more than one pipeline version, the most recent is used:
+      (Confluence, last modified 2026-03-23), the source for DRP compute and
+      storage, using its most recent pipeline version:
       \begin{itemize}
       \item DR1 compute, \S1.2.4: runtimes from \vthirty{} (DM-53697) on
             Milano nodes, for the first year of \texttt{baseline\_v5.0.0}
@@ -72,9 +62,8 @@ sheet (\texttt{make tables}).
       \item DP2 storage with compression, \S1.1.3, for the $\sim$30k-visit DP2
             visit list.
       \end{itemize}
-      \href{https://rtn-109.lsst.io/}{RTN-109} is the published write-up of
-      the method. Its figures predate compression and v30, so cite it for the
-      method, not the numbers.
+      \href{https://rtn-109.lsst.io/}{RTN-109} describes the method; its
+      figures predate compression and v30.
 \item \emph{Rubin Key Numbers} (Confluence): observing nights, visits per
       night, image size and raw compression.
 \item \emph{DP2 performance metrics} (June 2026): the compute DP2 actually
@@ -90,14 +79,9 @@ sheet (\texttt{make tables}).
 \item RFC-1134: Prompt Processing product tiers and retention.
 \end{itemize}
 
-Statements attributed to a team (for example ``the Qserv team, September
-2026'') record configuration or intent confirmed in project discussion that
-is not yet written up elsewhere.
-
 \subsection{Units}
 
-Compute is given three ways because each serves a different reader.
-\emph{Core-hours} are what the estimates measure. \emph{Node-days} are how
+Compute is given three ways. \emph{Core-hours} are what the estimates measure. \emph{Node-days} are how
 campaigns are reported, at the \smCoresNode{}-core reference node.
 \emph{Peak concurrent cores} across the processing window are what has to be
 bought. Storage uses decimal units (1\,PB = 1000\,TB). Costs are in US dollars

@@ -49,18 +49,13 @@ forecasts:
 \item the USDF's Qserv;
 \item raw data and the retained data-release products, on disk and on tape.
 \end{itemize}
-Tape backup is a USDF responsibility in the multi-site DRP plan. Partner
-facilities also run Qserv deployments of their own (DP2 has been ingested at
-the UKDF, and a Polish Data Facility deployment is planned); those are partner
-costs. The other and miscellaneous disk allowance is not reduced, because the
-user areas, APDB and simulation output it stands in for stay at the USDF
-whoever does the processing.
+Partner Qserv deployments are partner costs. The other and miscellaneous disk
+allowance is not reduced, because what it stands in for stays at the USDF.
 
 \smpara{Refresh by cohort.}
 Hardware bought in fiscal year $x$ is replaced in year $x$ plus its lifetime,
 starting from the purchases in \tabref{tab:smPreops}. The lifetime is
-\smLifeCompute{} years for compute and \smLifeStorage{} for storage. The
-construction-era tables refreshed compute after three years.
+\smLifeCompute{} years for compute and \smLifeStorage{} for storage.
 
 \smpara{FY2026 uses actual requests.}
 The first column of both forecasts uses the FY2026 requests recorded in the
@@ -75,14 +70,12 @@ revision), and replace the Xeon and Rome exemplars of
 \item Usable Ceph disk: \smCephPerTB{} per TB.
 \item Tape: \$\smTapePerTB{} per TB.
 \end{itemize}
-Prices are held flat. The construction-era model assumed annual falls of 10\%
-for CPU, 5\% for storage and 8\% for Qserv (\tabref{tab:Inputs}).
+Prices are held flat.
 
 There is no current price for the fast (NVMe) tier of \tabref{tab:Storage}, so
 that tier is sized in \secref{sec:upstorage} but not separately costed. Hosting
-and overhead rates, which replace the NCSA overheads of
-\tabref{tab:opsOverheadCost}, were carried forward from an earlier agreement
-rather than re-quoted. They are the least well-founded cost inputs.
+and overhead rates were not re-quoted for 2026 and are the least well-founded
+cost inputs.
 
 \subsection{Result}
 

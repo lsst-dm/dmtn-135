@@ -13,54 +13,28 @@
 
 \section{Introduction}\label{sec:update}
 
-This document was written for construction. Rubin is now in operations. The
-US Data Facility (USDF) is hosted at the SLAC Shared Scientific Data Facility
-(S3DF) rather than at NCSA. Data Preview~2 (DP2) has been processed, and the
-resource usage of the Data Release Production (DRP) has been measured on the
-deployed hardware. The sections that follow derive the operations sizing and
-cost from those measurements.
-
-The construction-era document is retained unchanged in the appendices
-(\appref{app:construction}). Each of its tables is listed in
-\secref{sec:upstatus} with one of three statuses:
-
-\begin{itemize}
-\item \emph{updated}: superseded by a 2026 table, which is named;
-\item \emph{not updated}: retained as it stands, with the reason given;
-\item \emph{historical}: construction or pre-operations planning, where an
-      update would be meaningless.
-\end{itemize}
+This document gives the operations sizing and cost of Rubin data processing as
+of 2026, from Data Preview~2 (DP2) and the measured resource usage of Data
+Release Processing (DRP) at the US Data Facility (USDF), hosted at the SLAC
+Shared Scientific Data Facility (S3DF). The construction-era document is
+retained unchanged in the appendices (\appref{app:construction});
+\secref{sec:upstatus} gives the 2026 status of each of its tables.
 
 \smpara{Scope.}
-Sizing is given first with all processing at the USDF, then with DRP work
-shared with the French (CC-IN2P3) and UK (UKDF) data facilities. The Chilean
-facilities are not updated. Prompt Processing, including alert distribution,
-runs at the USDF on Kubernetes, not on the batch fleet; it is sized with the
-other USDF services (\secref{sec:upservices}).
+USDF sizing and cost are given with all processing at the USDF, and with DRP
+shared with CC-IN2P3 and the UKDF. Prompt Processing runs at the USDF on
+Kubernetes and is sized with the other services (\secref{sec:upservices}). The
+Chilean facilities are not updated.
 
-\smpara{Years, not releases.}
-Tables run over ten operations years, year~1 to year~10, which are fiscal
-years FY2026--FY2035 (October to September). Year~1 is DP2 as actually run.
-In each later year~$n$ the model sizes one processing campaign over all data
-taken so far, $n-1$ survey years, and buys the hardware for it in that year.
-It does not assume when a given data release starts, finishes or is
-published. A campaign that starts late in a fiscal year runs into the next:
-DR1 processing, for example, is planned to start in 2027 and finish in 2028.
+\smpara{Operations years.}
+Tables run over operations years 1--10, FY2026--FY2035. Year~1 is DP2. In each
+later year~$n$ the model sizes one processing campaign over the $n-1$ survey
+years taken so far, and buys its hardware in that year. It does not schedule
+data releases.
 
-If releases are annual, the campaign in year~$n$ produces DR$(n-1)$, and the
-text uses release names only where the release itself is meant, for example
-the catalogues Qserv serves. If a release is skipped, that year's campaign is
-not run, but the next campaign is the same size, because size depends on the
-data to date, not on the number of releases. Retained releases and their
-archive would be fewer. Other cadences are discussed in
-\secref{sec:upunknowns}.
-
-\smpara{How figures are labelled.}
-Figures are \emph{measured} when they come from the deployed system or a
-completed campaign; \emph{estimated} when they come from a projection built on
-measured per-task or per-dataset usage; and \emph{assumed} when nothing has yet
-been measured. Assumptions that materially move the answer are identified in
-the text.
+\smpara{Labels.}
+Figures are \emph{measured}, \emph{estimated} from measured per-task or
+per-dataset usage, or \emph{assumed}.
 
 \input{update2026/model}
 \input{update2026/status}

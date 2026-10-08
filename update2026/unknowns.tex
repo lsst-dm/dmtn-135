@@ -12,13 +12,10 @@ Each is an \emph{assumption} or an unresolved discrepancy, not a measurement.
       The difference is worth about a factor of two in DRP compute.
 \item \textbf{Idle and inter-stage multiplier} (\smIdle). Only the task-level
       ratio of wall time to CPU time (about 1.14) has been measured.
-\item \textbf{Release cadence}. The model runs one processing campaign a
-      year, and a release every two or three years is under discussion. Each
-      campaign covers all data to date, so fewer releases means fewer
-      campaigns of the same size, not larger ones. Whether
-      that saves hardware depends on whether a campaign is stretched out or
-      run more intensively, which has not been decided. Modelling it needs a
-      release-schedule parameter, which is not yet implemented.
+\item \textbf{Release cadence}. The model runs one campaign a year. A release
+      every two or three years would mean fewer campaigns, each covering all
+      data to date. Release retention on disk, in Qserv and on tape is set by
+      parameters; which years have a campaign is not yet a parameter.
 \item \textbf{Qserv catalogue basis}. The modelled DR1 catalogue is more than
       forty times the measured DP2 catalogue, for about seven times the visits.
       Per-table row counts for DP2 would settle this. They would also show:

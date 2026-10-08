@@ -41,8 +41,7 @@ already installed.
       in \secref{sec:upservices}.
 \item An \emph{other and miscellaneous allowance} of \smOtherFrac{} of the
       subtotal, standing in for user areas, the APDB and simulation output,
-      which are not itemised. It is shown as its own line so it can be
-      audited.
+      which are not itemised.
 \end{itemize}
 
 The need is \smDPtwoOnFloorPB{}\,PB for DP2, rising to \smDRoneOnFloorPB{}\,PB
@@ -53,15 +52,12 @@ figure depends on the live-intermediate fraction: live intermediates alone are
 
 \subsection{Fast tier}
 
-\tabref{tab:storageFloorOps} kept a separate fast tier for the APDB and the
-Qserv Object table. The 2026 model sizes the same tier from its own APDB and
-Qserv figures: \smFastDRoneTB{}\,TB in year 2, rising to \smFastDRnineTB{}\,TB in
-year 10 (\tabref{tab:smQserv}). The tier is \textbf{sized but not separately costed}. Its
-volume is in the forecast: the APDB within the on-floor total, costed at the
-disk rate, and the Object table on the Qserv nodes. What is missing is any
-premium for low-latency storage, because no current price per TB is available
-for it. The split of the remaining on-floor need between normal
-disk and object store is not updated.
+The fast tier holds the APDB and the Qserv Object table, as in
+\tabref{tab:storageFloorOps}: \smFastDRoneTB{}\,TB in year 2, rising to \smFastDRnineTB{}\,TB in
+year 10 (\tabref{tab:smQserv}). Its volume is costed, the APDB at the disk rate and the
+Object table on the Qserv nodes, but with no premium for low-latency storage,
+for which no current price is available. The split of the remaining on-floor
+need between normal disk and object store is not updated.
 
 \subsection{File counts}
 

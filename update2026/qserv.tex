@@ -6,9 +6,7 @@ This replaces the Qserv rows of \tabref{tab:storageSizingOps},
 
 \subsection{Deployed hardware}
 
-No citable hardware description of the operations Qserv service existed
-before this update. The Qserv team confirmed the following worker node
-configuration in July 2026:
+Worker nodes, as confirmed by the Qserv team in July 2026:
 
 \begin{itemize}
 \item CPU: one AMD EPYC 7543P (32 cores, 64 hardware threads, SMT enabled).
@@ -64,9 +62,7 @@ with overlap uplift $o = \smQsOverlap$ and replication $R = \smQsRep$.
 \smpara{Compression is applied once, on the capacity side.}
 ZFS compression is already in the usable capacity per node:
 $32\,\mathrm{TB} \times 2 \times 0.675$ usable $= 43.2$\,TB. The catalogue
-volume is therefore carried uncompressed. Applying a compression factor to the
-volume as well would count compression twice and understate the catalogue by
-about a factor of three.
+volume is therefore carried uncompressed.
 
 \smpara{Row sizes grow between releases.}
 As in \tabref{tab:storageSizingOps}, row sizes widen as measured columns are
@@ -76,12 +72,10 @@ reaching a factor of \smQsDRnineInfl{} by DR9. Forced sources are held flat,
 because that schema is fixed.
 
 \smpara{Forced sources include those on DIAObjects.}
-DP2 has a ForcedSourceOnDIAObject table about half the size of ForcedSource,
-and it can look missing. It is not. The LDM-141 forced-source count dates from
-when forced photometry on Objects and on DIAObjects shared one table. The later
-split into two tables did not change the total row count, so adding the
-second table would count it twice. This holds provided both tables have
-roughly the 41-byte row size.
+The LDM-141 forced-source count covers forced photometry on both Objects and
+DIAObjects, which DP2 holds in two tables (ForcedSource and
+ForcedSourceOnDIAObject), so the second table is not added separately. This
+assumes both have roughly the 41-byte row size.
 
 \smpara{Overlap.}
 The uplift of \smQsOverlap{} is measured on DP2: overlap bytes over chunk bytes,
