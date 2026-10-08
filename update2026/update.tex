@@ -32,13 +32,26 @@ The construction-era document is retained unchanged in the appendices
 \end{itemize}
 
 \smpara{Scope.}
-The update covers the ten loop years of operations, LOY1--LOY10, which are
-fiscal years FY2026--FY2035 (October to September). LOY1 is DP2; LOY2--LOY10
-are DR1--DR9, one data release per year. Other release cadences are under
-discussion and are not modelled (\secref{sec:upunknowns}). Sizing is given
-first with all processing at the USDF, then with DRP work shared with the
-French (CC-IN2P3) and UK (UKDF) data facilities. The Chilean facilities are not
-updated.
+Sizing is given first with all processing at the USDF, then with DRP work
+shared with the French (CC-IN2P3) and UK (UKDF) data facilities. The Chilean
+facilities are not updated.
+
+\smpara{Years, not releases.}
+Tables run over ten operations years, year~1 to year~10, which are fiscal
+years FY2026--FY2035 (October to September). Year~1 is DP2 as actually run.
+In each later year~$n$ the model sizes one processing campaign over all data
+taken so far, $n-1$ survey years, and buys the hardware for it in that year.
+It does not assume when a given data release starts, finishes or is
+published. A campaign that starts late in a fiscal year runs into the next:
+DR1 processing, for example, is planned to start in 2027 and finish in 2028.
+
+If releases are annual, the campaign in year~$n$ produces DR$(n-1)$, and the
+text uses release names only where the release itself is meant, for example
+the catalogues Qserv serves. If a release is skipped, that year's campaign is
+not run, but the next campaign is the same size, because size depends on the
+data to date, not on the number of releases. Retained releases and their
+archive would be fewer. Other cadences are discussed in
+\secref{sec:upunknowns}.
 
 \smpara{How figures are labelled.}
 Figures are \emph{measured} when they come from the deployed system or a

@@ -124,21 +124,22 @@ Two checks sit beside the projection in \tabref{tab:smQserv}:
 
 Usable data per node is \emph{assumed}:
 \begin{itemize}
-\item 43.2\,TB until LOY3;
-\item 86.4\,TB from LOY3, with all 24 NVMe slots populated;
-\item 172.8\,TB from LOY7, with denser drives.
+\item 43.2\,TB in years 1 and 2;
+\item 86.4\,TB from year 3, with all 24 NVMe slots populated;
+\item 172.8\,TB from year 7, with denser drives.
 \end{itemize}
 Qserv holds a sliding window of three releases: two served, one in
 preparation, as in the construction-era model.
 
-On these assumptions DR1 needs \smQsDRoneNodes{} nodes against
-\smQsNodesHave{} in service, a gap of \smQsDRoneGap{}. That gap depends
-entirely on when the empty slots are filled. If they are populated before DR1,
-the same \smQsDRoneWindowTB{}\,TB needs about half as many nodes. By DR9 the
-projection reaches \smQsDRnineNodes{} nodes. The fall in node count at DR6
+On these assumptions year 2, when the first data release is loaded, needs
+\smQsDRoneNodes{} nodes against \smQsNodesHave{} in service, a gap of
+\smQsDRoneGap{}. That gap depends entirely on when the empty slots are filled.
+If they are populated before the first release is loaded, the same
+\smQsDRoneWindowTB{}\,TB needs about half as many nodes. By year 10 the
+projection reaches \smQsDRnineNodes{} nodes. The fall in node count in year 7
 comes from the drive-density step, not from falling demand.
-\textbf{Populating the empty NVMe slots before DR1 is the most effective Qserv
-action available.}
+\textbf{Populating the empty NVMe slots before the first data release is loaded
+is the most effective Qserv action available.}
 
 \input{update2026/tables/smQservInputs}
 

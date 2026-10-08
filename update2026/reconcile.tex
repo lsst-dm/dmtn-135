@@ -10,7 +10,7 @@ The construction-era model sized the Qserv database in
         + N_{\mathrm{fs}}\,r_{\mathrm{fs}}\bigr) \times R ,
 \]
 which gives 3{,}509.56\,TB at LOY1. Multiplied by the overlap uplift of
-\smQsOverlap{}, that is exactly the 2026 DR1 figure of \smQsDRoneDiskTB{}\,TB.
+\smQsOverlap{}, that is exactly the 2026 year-2 figure of \smQsDRoneDiskTB{}\,TB.
 
 The two models share LDM-141 row counts and three-fold replication. The match
 therefore shows that the 2026 model follows the same arithmetic; it does not
@@ -19,8 +19,8 @@ independently validate LDM-141. It also pins down three things:
 \item Neither model applies compression to the catalogue volume.
 \item The 2026 model adds the measured overlap; the construction-era model
       had none.
-\item The construction-era LOY1 is a full data release. It corresponds to the
-      2026 DR1 column, not the DP2 column.
+\item The construction-era LOY1 is a full survey year. It corresponds to the
+      2026 year-2 column, not the DP2 column (year 1).
 \end{itemize}
 
 \subsection{Why the 2026 demand and cost differ}\label{sec:upwhy}
@@ -38,7 +38,7 @@ and kept two images per visit as the baseline (\secref{sec:sizeinputs}). The
 0.464, or 3.80\,GB per visit. Fewer visits (0.70) times less data per visit
 (0.60) gives 0.42.
 
-\smpara{DRP compute: \smCmpComputeOne{} at DR1, \smCmpComputeNine{} at DR9, in
+\smpara{DRP compute: \smCmpComputeOne{} at one survey year, \smCmpComputeNine{} at nine, in
 core-hours.}
 Less input is partly offset by a higher rate: \smChPerTB{} core-hours per input
 TB now, against about 23{,}500 implied by \tabref{tab:computeSizingOps}. That
@@ -50,7 +50,7 @@ overstates any fall in the processing work itself.
 
 \smpara{On-floor disk: \smCmpDiskOne{}--\smCmpDiskNine{}.}
 Raw data on the floor is only \smCmpRawNine{} of the construction-era figure
-by DR9, following the smaller input. The rest of the disk is structured
+at nine survey years, following the smaller input. The rest of the disk is structured
 differently:
 \begin{itemize}
 \item The construction era held every significant intermediate on disk until
@@ -63,7 +63,7 @@ differently:
 The comparison is therefore only as good as the live-intermediate fraction,
 which is unmeasured.
 
-\smpara{Tape: \smCmpTapeOne{} at DR1, \smCmpTapeNine{} at DR9.}
+\smpara{Tape: \smCmpTapeOne{} at one survey year, \smCmpTapeNine{} at nine.}
 This is the largest difference, and it comes from policy rather than
 measurement. The construction-era model archived all raw images and all data
 products, and also backed up every filesystem to tape, including annual
@@ -72,16 +72,16 @@ retained release products only. It adds no new backup of on-floor data,
 because a separate backup system already exists. If filesystem backups were
 restored to scope, tape would grow substantially.
 
-\smpara{Qserv: \smCmpQservOne{} at DR1, rising to \smCmpQservNine{}.}
+\smpara{Qserv: \smCmpQservOne{} at one survey year, rising to \smCmpQservNine{}.}
 This is the one demand that is \emph{larger}, and the difference is the
 overlap allowance. Both models hold three releases in Qserv, and both apply
 the same catalogue formula to each release (\secref{sec:upreconcile}). The
 2026 model then multiplies each release by the measured overlap uplift of
 \smQsOverlap{}; the construction-era model has no such term.
 
-The ratio is lower at DR1 for two reasons. The construction-era first year
+The ratio is lower at one survey year for two reasons. The construction-era first year
 also carries 584\,TB beyond its first release (4{,}094\,TB against 3{,}510\,TB).
-The 2026 DR1 window includes the DP2 catalogue. Node counts follow storage,
+The 2026 year-2 window includes the DP2 catalogue. Node counts follow storage,
 because at these points both models assume the same usable data per node.
 
 \smpara{Cost.}

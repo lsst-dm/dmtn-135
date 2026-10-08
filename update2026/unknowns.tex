@@ -12,9 +12,10 @@ Each is an \emph{assumption} or an unresolved discrepancy, not a measurement.
       The difference is worth about a factor of two in DRP compute.
 \item \textbf{Idle and inter-stage multiplier} (\smIdle). Only the task-level
       ratio of wall time to CPU time (about 1.14) has been measured.
-\item \textbf{Release cadence}. This update assumes one data release a year,
-      and a release every two or three years is under discussion. Fewer
-      releases would each be larger, with fewer campaigns in total. Whether
+\item \textbf{Release cadence}. The model runs one processing campaign a
+      year, and a release every two or three years is under discussion. Each
+      campaign covers all data to date, so fewer releases means fewer
+      campaigns of the same size, not larger ones. Whether
       that saves hardware depends on whether a campaign is stretched out or
       run more intensively, which has not been decided. Modelling it needs a
       release-schedule parameter, which is not yet implemented.

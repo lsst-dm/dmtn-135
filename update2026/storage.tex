@@ -25,7 +25,7 @@ estimates \smDPtwoOutPB{}\,PB written, of which \smDPtwoRelPB{}\,PB are release
 products, for the $\sim$30k-visit DP2 visit list. DP2 fitted within the storage
 already installed.
 
-\smpara{On-floor need} in a loop year is the sum of:
+\smpara{On-floor need} in an operations year is the sum of:
 \begin{itemize}
 \item \emph{Live intermediates}: the share of the campaign's intermediates on
       disk at its high-water mark. This model takes \smLiveFrac{}. It is the
@@ -44,17 +44,17 @@ already installed.
 \end{itemize}
 
 The need is \smDPtwoOnFloorPB{}\,PB for DP2, rising to \smDRoneOnFloorPB{}\,PB
-at DR1 and \smDRnineOnFloorPB{}\,PB at DR9, against about
-\smInstalledPB{}\,PB installed today (\tabref{tab:smStorage}). Most of the DR1
+in year 2 and \smDRnineOnFloorPB{}\,PB by year 10, against about
+\smInstalledPB{}\,PB installed today (\tabref{tab:smStorage}). Most of the year-2
 figure depends on the live-intermediate fraction: live intermediates alone are
-\smDRoneLiveInterPB{}\,PB at DR1.
+\smDRoneLiveInterPB{}\,PB in year 2.
 
 \subsection{Fast tier}
 
 \tabref{tab:storageFloorOps} kept a separate fast tier for the APDB and the
 Qserv Object table. The 2026 model sizes the same tier from its own APDB and
-Qserv figures: \smFastDRoneTB{}\,TB at DR1, rising to \smFastDRnineTB{}\,TB at
-DR9 (\tabref{tab:smQserv}). The tier is \textbf{sized but not separately costed}. Its
+Qserv figures: \smFastDRoneTB{}\,TB in year 2, rising to \smFastDRnineTB{}\,TB in
+year 10 (\tabref{tab:smQserv}). The tier is \textbf{sized but not separately costed}. Its
 volume is in the forecast: the APDB within the on-floor total, costed at the
 disk rate, and the Object table on the Qserv nodes. What is missing is any
 premium for low-latency storage, because no current price per TB is available
@@ -76,7 +76,7 @@ Neither yet has a DR1-scale size.
 \subsection{Tape}
 
 Tape is cumulative: raw and calibration data and every data release are
-preserved, so the footprint only grows. It reaches \smDRnineTapePB{}\,PB by DR9,
+preserved, so the footprint only grows. It reaches \smDRnineTapePB{}\,PB by year 10,
 including archive already on the floor (\tabref{tab:smTape}). Two inputs are
 \emph{unverified}:
 \begin{itemize}
